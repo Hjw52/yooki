@@ -1,0 +1,281 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #555;
+    font-size: 12px;
+    min-width: 1100px;
+    font-family: "Microsoft YaHei", "微软雅黑", helvetica, arial, verdana, tahoma, sans-serif;
+
+}
+
+.bg1 {
+    background: #fff url(../image/bg.jpg) no-repeat center top;
+}
+
+.bg2 {
+    background: #002a44 url(../image/night.jpg) no-repeat center top;
+}
+
+#header {
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    background-color: #fafafa;
+    position: relative;
+}
+
+#header .header-cont {
+    position: relative;
+    width: 1100px;
+    margin: 0 auto;
+}
+
+#header .header-cont a {
+    color: #8f8c8f;
+    text-decoration: none;
+}
+
+#header .header-cont i {
+    color: #8f8c8f;
+    margin: 0 20px;
+    font-style: normal;
+}
+
+#content {
+    width: 1100px;
+    margin: 0 auto;
+    height: 500px;
+    position: relative;
+}
+
+.normalLoginHead {
+    height: 35px;
+    position: relative
+}
+
+.normalTitle {
+    font-size: 18px;
+    line-height: 100%;
+}
+
+#normalLogin {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+#normalLogin span:hover {
+    color: deepskyblue;
+}
+
+#mobileLogin {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+#mobileLogin span:hover {
+    color: deepskyblue;
+}
+
+.formGroup {
+    margin-top: 0;
+    width: 100%;
+    position: relative;
+}
+
+.normalL {
+    width: 235px;
+    padding: 9px 8px 9px 35px;
+    vertical-align: middle;
+    margin: 0;
+    height: 20px;
+    border: 1px solid #c9c9c9;
+    line-height: 20px;
+    font-size: 14px;
+    box-shadow: 0 0 0 30px #fff inset;
+    outline: 0;
+}
+
+.formLabel {
+    display: block;
+    width: 279px;
+    height: 100%;
+    line-height: 200%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: text;
+}
+
+.formSpan {
+    width: 190px;
+    font-size: 12px;
+    height: 20px;
+    margin-top: -10px;
+    position: absolute;
+    left: 37px;
+    top: 50%;
+    line-height: 20px;
+    color: #999;
+    background-color: #fff;
+}
+
+#forgetPwd {
+    position: absolute;
+    top: 170px;
+    left: 260px
+}
+
+#forgetPwd span:hover {
+    color: deepskyblue;
+    cursor: pointer;
+}
+
+.lButton {
+    margin-top: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.loginButton {
+    background-color: #2FB3FF;
+    width: 240px;
+    display: block;
+    height: 40px;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    text-align: center;
+    line-height: 38px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    font-family: "Microsoft YaHei", helvetica, sans-serif;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.logon {
+    position: absolute;
+    top: 230px;
+    left: 287px;
+    cursor: pointer;
+}
+
+.logon span:hover {
+    color: deepskyblue;
+}
+
+.actPwdButton1 {
+    height: 40px;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    text-align: center;
+    line-height: 38px;
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+    background-color: #8f8c8f;
+    font-family: "Microsoft YaHei", helvetica, sans-serif;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+    width: 100px;
+    position: relative;
+    z-index: 2;
+    cursor: not-allowed;
+}
+
+.actPwdButton2 {
+    height: 40px;
+    border: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    text-align: center;
+    line-height: 38px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    background-color: #2fb3ff;
+    font-family: "Microsoft YaHei", helvetica, sans-serif;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+    width: 100px;
+    position: relative;
+    z-index: 2;
+}
+
+#loginBox2 {
+    display: none;
+}
+
+#logonBox {
+    display: none;
+}
+
+.login {
+    position: absolute;
+    top: 360px;
+    left: 287px;
+    cursor: pointer;
+}
+
+.login span:hover {
+    color: deepskyblue;
+}
+
+.errorMsg {
+    color: #f60000;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+
+}
+.contentFrame{
+    width: 280px;
+    padding: 20px 30px 30px;
+    background: #fff;
+    z-index: 99;
+    color: #333;
+    font-family: 'microsoft yahei',helvetica,arial,sans-serif;
+    position: relative;
+    overflow: hidden;
+    font-size: 12px;
+}
+.loginCss{
+    display: block;
+    position: absolute;
+    right: 50px;
+    top: 100px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+.QRCode{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    outline: 0;
+    background: url("../image/loginIcons.png") 0 -322px no-repeat;
+    background-position-x: 0px;
+    background-position-y: -322px;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}

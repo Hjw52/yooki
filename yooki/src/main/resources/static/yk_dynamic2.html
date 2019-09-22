@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>动态页</title>
+    <link href="css/yk_dynamic2.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/emojione/1.5.2/assets/sprites/emojione.sprites.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/emojionearea.min.css" media="screen">
+    <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/emojione/1.5.2/lib/js/emojione.min.js"></script>
+    <script type="text/javascript" src="js/emojionearea.js"></script>
+    <script type="text/javascript">
+        var sessionId=sessionStorage.getItem("userId");
+        var v1=new Vue({
+            el:'.praise',
+            data:{
+                counter: 99
+            }
+        });
+        function loadFile(file){
+            $("#filename").html(file.name);
+        }
+        //格式化时间
+        function gettime(t){
+            var _time=new Date(t);
+            var   year=_time.getFullYear();//2017
+            var   month=_time.getMonth()+1;//7
+            var   date=_time.getDate();//10
+            var   hour=_time.getHours();//10
+            var   minute=_time.getMinutes();//56
+            var   second=_time.getSeconds();//15
+            return   year+"年"+month+"月"+date+"日   ";//这里自己按自己需要的格式拼接
+        }
+        //显示动态
+        $(function(){
+            /*初始化*/
+            var counter = 0; /*计数器*/
+            var pageStart = 0; /*offset*/
+            var pageSize = 4; /*size*/
+            var isEnd = false;/*结束标志*/
+            var isAjax = false;/*防止滚动过快，服务端没来得及响应造成多次请求*/
+            /*首次加载*/
+            $("#cards").children().detach();
+            getData(pageStart, pageSize);
+            /*监听加载更多*/
+            $(window).scroll(function(){
+                console.log(isEnd, isAjax);
+                /*滚动加载时如果已经没有更多的数据了、正在发生请求时，不能继续进行*/
+                if(isEnd == true || isAjax == true){
+                    return;
+                }
+                // 当滚动到最底部以上100像素时， 加载新内容
+                if ($(document).height() - $(this).scrollTop() - $(this).height()<100){
+                    counter ++;
+                    pageStart = counter * pageSize;
+                    getData(pageStart, pageSize);
+                    // console.log(1);
+                }
+            });
+            function getData(offset,size){
+                // console.log(offset,size);
+                isAjax = true;
+                $.ajax({
+                    url:"/getAll",
+                    datatype:"json",
+                    type:"get",
+                    success: function(reponse){
+                        isAjax = false;
+                        // mydata=data;
+                        var data = reponse;
+                        var sum = reponse.length;
+                        /************业务逻辑块：实现拼接html内容并append到页面*****************/
+                        // console.log(offset , size, sum);
+
+                        /*如果剩下的记录数不够分页，就让分页数取剩下的记录数
+                        * 例如分页数是5，只剩2条，则只取2条
+                        *
+                        * 实际MySQL查询时不写这个不会有问题
+                        */
+                        if(sum - offset < size ){
+                            size = sum - offset;
+                        }
+
+                        /*使用for循环模拟SQL里的limit(offset,size)*/
+                        // $("#cards").children().detach();
+                        for(var i=offset; i<offset+size; i++){
+                            var $card = $(" <div class=\"card\">\n" +
+                                "                <a href=\"#\" class=\"user-head\" style=\"border-radius: 50%;\"><img src=\""+data[i].userInfo.facePic+"\" style=\"width:100%;height:100%\"></a>\n" +
+                                "                <a href=\"#\" class=\"user-name\">"+data[i].userInfo.userName+"</a>\n" +
+                                "                <a href=\"#\" class=\"time\">" +gettime(data[i].dynamicTime)+ "</a>\n" +
+                                "                <button id=\"focus\" type=\"button\" class=\"btn btn-default\" style=\"position:relative;margin-left: 540px;margin-top:0px;width: 70px;\">+ 关注</button>\n" +
+                                "                <div class=\"content\">\n" +
+                                "                    <div class=\"text\">" + data[i].dynamicText + "</div>\n" +
+                                "                    <div class=\"content-zoom\">\n" +
+                                "                        <div class=\"imgbox\"><img src=\"" + data[i].dynamicImage + "\"style=\"width: 100%;height: 100%;border-radius: 4px;margin-top:5px;\"></div>\n" +
+                                "                    </div>\n" +
+                                "                </div>\n" +
+                                "                <div class=\"button-bar\">\n" +
+                                "                    <a class=\"frow\"> <span class=\"glyphicon glyphicon-share button-bar-plus\" style=\"color: rgb(255, 142, 143);font-size: 18px;margin-left: 0px;\">0</span></a>\n" +
+                                "                    <a class=\"commit\"><span class=\"glyphicon glyphicon-comment button-bar-plus\" style=\"color: rgb(255, 142, 143); font-size: 18px;\">0</span></a>\n" +
+                                "                    <a class=\"praise\"><span class=\"glyphicon glyphicon-thumbs-up button-bar-plus\" style=\"color: rgb(255, 142, 143); font-size: 18px;\">" + data[i].likeNumber +"</span></a>\n" +
+                                "                </div>\n" +
+                                "            </div>" +
+                                " <div class=\"frow-panel\">\n" +
+                                "            <div class=\"frow-text\"><textarea class=\"textarea\" placeholder=\"请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。\"></textarea>\n" +
+                                "                <button type=\"button\" class=\"btn btn-primary btn-sm frow-button\">转发</button>\n" +
+                                "                <div class=\"f-face\"><a href=\"#\"><img src=\"images/face.png\" class=\"face\"></a></div>\n" +
+                                "                <div class=\"frow-list\">\n" +
+                                "                    <div class=\"list-item\">\n" +
+                                "                        <div class=\"fl-face\"><a href=\"#\"><img src=\"images/face.png\" class=\"face\"></a></div>\n" +
+                                "                        <div class=\"item-name\"><a href=\"#\">科科</a></div>\n" +
+                                "                        <div class=\"item-text\">一天天的干啥呢，不出shipin，也不zhibo</div>\n" +
+                                "                        <div class=\"item-info\">\n" +
+                                "                            <span class=\"item-time\">2小时前</span>\n" +
+                                "                            <a href=\"#\" class=\"info-fr\">转发</a>\n" +
+                                "                        </div>\n" +
+                                "                    </div>\n" +
+                                "                    <div class=\"list-item\">\n" +
+                                "                        <div class=\"fl-face\"><a href=\"#\"><img src=\"images/face.png\" class=\"face\"></a></div>\n" +
+                                "                        <div class=\"item-name\"><a href=\"#\">Kaka</a></div>\n" +
+                                "                        <div class=\"item-text\">youku is well</div>\n" +
+                                "                        <div class=\"item-info\">\n" +
+                                "                            <span class=\"item-time\">09-08</span>\n" +
+                                "                            <a href=\"#\" class=\"info-fr\">转发</a>\n" +
+                                "                        </div>\n" +
+                                "                    </div>\n" +
+                                "                </div>\n" +
+                                "                <div class=\"frow-more\">\n" +
+                                "                    <a class=\"item-nomore\">没有更多啦(〜￣△￣)〜</a>\n" +
+                                "                </div>\n" +
+                                "            </div>\n" +
+                                "        </div>\n" +
+                                "        <div class=\"commit-panel\">\n" +
+                                " <div class='dynamic-id' style='display: none'>"+data[i].dynamicId+"</div>\n"+
+                                "            <div class=\"frow-text\"><textarea class=\"textarea\" placeholder=\"请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。\"></textarea>\n" +
+                                "                <button type=\"button\" class=\"btn btn-primary btn-sm frow-button\">评论</button>\n" +
+                                "                <div class=\"f-face\"><a href=\"#\"><img src=\"images/face.png\" class=\"face\"></a></div>\n" +
+                                "                <div class=\"frow-list\">\n" +
+                                "                    <div class=\"list-item\">\n" +
+                                "                        <div class=\"fl-face\"><a href=\"#\"><img src=\"images/face.png\" class=\"face\"></a></div>\n" +
+                                "                        <div class=\"item-name\"><a href=\"#\">科科</a></div>\n" +
+                                "                        <div class=\"item-text\">一天天的干啥呢，不出shipin，也不zhibo</div>\n" +
+                                "                        <div class=\"item-info\">\n" +
+                                "                            <span class=\"item-time\">2小时前</span>\n" +
+                                "                            <a href=\"#\" class=\"info-fr\">评论</a>\n" +
+                                "                        </div>\n" +
+                                "                    </div>\n" +
+                                "                    <div class=\"list-item\">\n" +
+                                "                        <div class=\"fl-face\"><a href=\"#\"><img src=\"images/face.png\" class=\"face\"></a></div>\n" +
+                                "                        <div class=\"item-name\"><a href=\"#\">Kaka</a></div>\n" +
+                                "                        <div class=\"item-text\">youku is well</div>\n" +
+                                "                        <div class=\"item-info\">\n" +
+                                "                            <span class=\"item-time\">09-08</span>\n" +
+                                "                            <a href=\"#\" class=\"info-fr\">评论</a>\n" +
+                                "                        </div>\n" +
+                                "                    </div>\n" +
+                                "                </div>\n" +
+                                "                <div class=\"frow-more\">\n" +
+                                "                    <a class=\"item-nomore\">点击加载更多(〜￣△￣)〜</a>\n" +
+                                "                </div>\n" +
+                                "            </div>\n" +
+                                "        </div>");
+                            $("#cards").append($card);
+                            $.ajax({
+                                url:"/getCommentNum",
+                                datatype:"json",
+                                type:"get",
+                                data:{
+                                    id:data[i].dynamicId
+                                },
+                                success: function(reponse){
+                                    // console.log(reponse)
+                                    $(".commit span:eq(0)").html(reponse);
+                                    console.log( $(".commit span:eq("+i+")").html());
+                                    // $(".glyphicon glyphicon-share button-bar-plus")[0].innerText=reponse;
+                                }
+                            });
+                            console.log( $(".commit span")[0].innerText);
+                        }
+                        /*******************************************/
+                        if ( (offset + size) >= sum){
+                            isEnd = true;
+                            //提示没有了
+                            // var index = layer.load(0, {shade: false});
+                            //     layer.msg('已经到底啦');
+                            // }
+                        }
+                    },
+                    error: function(xhr, type){
+                        alert('Ajax error!');
+                    }
+                });
+            }
+        });
+        //表情文本编辑器
+        $(document).ready(function() {
+            $("#input").emojioneArea();
+            //表情显示
+            $(".content .text").each(function () {
+                var value = $(this).text();
+                var code = $('<div/>').text(value).html(); //html转义
+                $(this).html(emojione.toImage(code));
+            });
+            //转发列表切换
+            $(document).on("click", ".frow", function () {
+                // console.log($(this).parent().parent().next());
+                if ($(".commit-panel").css("display") == "block") {
+                    $(".commit-panel").css("display", "none");
+                }
+                $(this).parent().parent().next().toggle();
+            });
+            //评论列表切换
+            $(document).on("click", ".commit", function () {
+                var counter = 0; /*计数器*/
+                var pageStart = 0; /*offset*/
+                var pageSize = 2; /*size*/
+                if ($(".frow-panel").css("display") == "block") {
+                    $(".frow-panel").css("display", "none");
+                }
+                var dynamicId= $(this).parent().parent().next().next().children($(".dynamic-id"))[0].innerText;
+                /*首次加载*/
+                $(".frow-list").children().detach();
+                getComment(dynamicId,pageStart, pageSize);
+                $(this).parent().parent().next().next().toggle();
+                //6获取头像
+                $.ajax({
+                    url:"/selectByPrimaryKey",
+                    type:"post",
+                    data:{
+                        userId:sessionId,
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                        console.log(data.facePic);
+                        if (data.facePic==""){
+                            $(".f-face img").attr("src", "image/用户头像未登录80-80.png");
+                        }else {
+                            $(".f-face img").attr("src", data.facePic);
+                        }
+                        if (data.facePic==""){
+                            $("#user_pic").attr("src", "image/用户头像未登录80-80.png");
+                        }else {
+                            $("#user_pic").attr("src", data.facePic);
+                        }
+                        if (data.facePic==""){
+                            $("#face").attr("src", "image/用户头像未登录80-80.png");
+                        }else {
+                            $("#face").attr("src", data.facePic);
+                        }
+                    }
+                })
+                /*监听加载更多*/
+                $(document).on('click', '.item-nomore', function(){
+                    counter ++;
+                    pageStart = counter * pageSize;
+                    getComment(dynamicId,pageStart,pageSize);
+                });
+                //发表评论
+                $(document).on("click",".frow-button",function () {
+                    // alert(1);
+                    // console.log(2);
+                    var text=$(this).prev().val();
+                    $.ajax({
+                        url:"/insertComment",
+                        datatype:"json",
+                        type:"post",
+                        data:{
+                            dynamicContent:text,
+                            userId:sessionId,
+                            dynamicId:dynamicId
+                        },
+                        success: function(reponse){
+                            console.log("insert");
+                        }
+                    })
+                });
+
+            });
+            function getComment(dynamicId,offset,size){
+                $.ajax({
+                    url: "/getComment",
+                    datatype: "json",
+                    type: "post",
+                    data: {id: dynamicId},
+                    success: function (data) {
+                        //插入动态评论
+                        var reponse= data;
+                        var sum = data.length;
+                        if(sum - offset < size ){
+                            size = sum - offset;
+                        }
+                        // $(".frow-list").lastChild.remove();
+                        for (var i=offset;i<offset+size;i++){
+                            var  $comment=$("<div class=\"list-item\">\n" +
+                                "                        <div class=\"fl-face\"><a href=\"#\"><img src=\""+reponse[i].userInfo.facePic+"\" class=\"face\"></a></div>\n" +
+                                "                        <div class=\"item-name\"><a href=\"#\">"+reponse[i].userInfo.userName+"</a></div>\n" +
+                                "                        <div class=\"item-text\">"+reponse[i].dynamicContent+"</div>\n" +
+                                "                        <div class=\"item-info\">\n" +
+                                "                            <span class=\"item-time\">"+ gettime(reponse[i].commentTime)+"</span>\n" +
+                                "                            <a href=\"#\" class=\"info-fr\">评论</a>\n" +
+                                "                        </div>\n" +
+                                "                    </div>");
+                            $(".frow-list").append($comment);
+                        }
+                        if ( (offset + size) >= sum){
+                            $(".item-nomore").hide();
+                        }else{
+                            $(".item-nomore").show();
+                        }
+                    }
+                })
+            }
+
+
+            $(document).on("click", ".praise", function () {
+                layer.msg('点赞成功', {
+                    offset: 'c',
+                    anim: 1
+                })
+            });
+            //关注
+            $(document).on("click", "#focus", function () {
+                if ($(this)[0].innerText == "+ 关注") {
+                    layer.msg('关注成功', {
+                        offset: 'c',
+                        anim: 1
+                    });
+                    $(this)[0].innerText = "已关注";
+                } else {
+                    layer.msg('确定取消关注？', {
+                        time: 0 //不自动关闭
+                        , btn: ['取消关注', '点错了~']
+                        , yes: function (index) {
+                            layer.close(index);
+                            layer.msg('取消关注成功', {
+                                offset: 'c',
+                                anim: 1
+                            });
+                            $("#focus")[0].innerText = "+ 关注";
+                        }
+                    });
+                }
+            });
+            //发表
+            $(document).on("click", "#publish", function () {
+                $("#user-id").val(sessionId);
+                $("#form1").submit();
+            });
+        });
+        //显示用户信息
+        $(function () {
+            var fun1 = $.ajax({url: "/selectIdol", type: 'GET', dataType: 'json', data: {id: sessionId}}),
+                fun2 = $.ajax({url: "/selectFans", type: 'GET', dataType: 'json', data: {id: sessionId}}),
+                fun3 = $.ajax({url: "/selectUser", type: 'GET', dataType: 'json', data: {id: sessionId}});
+            fun4 = $.ajax({url: "/selectDynamic", type: 'GET', dataType: 'json', data: {id: sessionId}});
+            $.when(fun1, fun2, fun3, fun4).then(function (data1, data2, data3, data4) {
+                //成功回调，所有请求正确返回时调用
+                $("#idol_num")[0].innerText = data1[0];
+                $("#fans_num")[0].innerText = data2[0];
+                $("#dynamic_num")[0].innerText = data4[0];
+                $("#user_name")[0].innerText = data3[0].userName;
+                $("#user_pic").attr("src", data3[0].facePic);
+                $("#face").attr("src", data3[0].facePic);
+                // console.log(data1);
+                // console.log(data2);
+                // console.log(data3);
+                // console.log(data4);
+            }, function () {
+                //失败回调，任意一个请求失败时返回
+                console.log('error');
+            })
+        });
+
+    </script>
+    <style type="text/css">
+        li .dropdown-menu {
+            margin: 0;
+        }
+        li:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="nav">
+        <div id="nav-con">
+            <ul class="nav nav-pills">
+                <li><a href="homepage.html"> <span class="glyphicon glyphicon-chevron-right" style="color: rgb(255, 0, 71);"></span> 首页</a></li>
+                <li><a href="#">剧集</a></li>
+                <li><a href="#">电影</a></li>
+                <li><a href="#">综艺</a></li>
+                <li><a href="#">体育</a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">频道</a>
+                    <ul class="dropdown-menu">
+                        <li id="channel" style="height: 70px;width: 210px;">
+                            <dl>
+                                <dd>
+                                    <a href="#">动漫</a>
+                                    <a href="#">少儿</a>
+                                    <a href="#">综艺</a>
+                                    <a href="#">时尚</a>
+                                    <br>
+                                    <a href="#">生活</a>
+                                    <a href="#">搞笑</a>
+                                    <a href="#">科技</a>
+                                    <a href="#">发现</a>
+                                </dd>
+                            </dl>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="nav-search">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <div id="nav-search-submit"><a href="#"><span class="glyphicon glyphicon-search" style="color: rgb(255, 0, 71); font-size: 18px;"></span></a></div>
+            </form>
+        </div>
+        <div id="nav-handle-1">
+            <ul class="nav nav-pills">
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">消息</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">回复我的</a></li>
+                        <li><a href="#">@我的</a></li>
+                        <li><a href="#">收到的赞</a></li>
+                        <li><a href="#">系统通知</a></li>
+                        <li><a href="#">我的消息</a></li>
+                    </ul>
+                </li>
+                <li><a href="yk_dynamic2.html">动态</a></li>
+                <li><a href="#">稍后再看</a></li>
+                <li><a href="personal_index.html">收藏</a></li>
+                <li><a href="history.html">历史</a></li>
+                <li><a href="personal_index.html">上传视频</a></li>
+            </ul>
+        </div>
+        <div class="i-face"><a href="PersonInf.html"><img id="face" src="image/face.png" class="face"></a></div>
+    </div>
+    <div class="user-panel">
+        <div class="user-pic"><img src="image/user-bg.png"style="width: 100%;height: 100%;"></div>
+        <a class="user-name" href="personal_index.html" style="text-decoration: none;" id="user_name">优酷用户-kaka</a>
+        <div class="user-bottom">
+            <a href="#">
+                <div class="bottom-part">
+                <p class="part-number" id="idol_num">0</p>
+                <p class="part-text">关注</p>
+                </div>
+            </a>
+            <a href="#">
+            <div class="bottom-part">
+                <p class="part-number" id="fans_num">0</p>
+                <p class="part-text">粉丝</p>
+            </div>
+            </a>
+            <a href="#">
+            <div class="bottom-part">
+                <p class="part-number" id="dynamic_num">0</p>
+                <p class="part-text">动态</p>
+            </div>
+            </a>
+        </div>
+        <img id="user_pic" src="image/face.png" class="user-head">
+    </div>
+    <div class="note-panel"><span style="margin-left: 15px;position:absolute;margin-top:10px;">公告栏</span>
+    <div class="note-content"><a href="#" title="播放问题？快来反馈！"><img src="image/note.jpg" style="width: 100%;height: 100%;border-radius: 4px"></a></div>
+    </div>
+    <div class="tag-panel"><span class="title">热门话题</span><span class="more">更多></span>
+    <div class="tag-list">
+        <a href="#" class="tag">#热门评论#</a>
+        <a href="#" class="tag">#最新上线#</a>
+        <a href="#" class="tag">#互动视频大赏#</a>
+        <a href="#" class="tag">#我要捉虫#</a>
+        <a href="#" class="tag">#我的荣誉周报#</a>
+        <a href="#" class="tag">#我的生活态度#</a>
+        <a href="#" class="tag">#优酷线上交友舞台#</a>
+        <a href="#" class="tag">#蓝桥产业班宣布上市#</a>
+        <a href="#" class="tag">#联系我们#</a>
+    </div>
+    </div>
+    <div id="main-panel">
+        <div class="section-block">
+            <form id="form1"  action="/insert" method="post" enctype="multipart/form-data" target="stop">
+            <input id="input" name="dynamicText">
+                <input id="user-id" name="userId" style="display: none" value="1">
+            <button id="publish" type="button" class="btn btn-success publish-button">发布</button>
+            <div class="file-container">
+            <button type="button" class="btn btn-primary insert-button">图片or视频</button>
+            <input type="file" name="files" id="jobData" onchange="loadFile(this.files[0])" class="insert-button" style="font-size:34px; opacity:0">
+            </div>
+            <span id="filename" class="file-name">未上传文件</span>
+            </form>
+            <iframe name="stop" style="display:none;"></iframe>
+        </div>
+<!--        <iframe id="id_iframe" name="myiframe" style="display:none;"></iframe>-->
+        <div class="tab-bar">
+            <div class="tab"><a href="#" class="tab-text">热门</a> </div>
+            <div class="tab"><a href="#" class="tab-text">全部</a> </div>
+            <div class="tab"><a href="#" class="tab-text">投稿视频</a> </div>
+            <div class="tab"><a href="#" class="tab-text">追番</a> </div>
+            <div class="tab"><a href="#" class="tab-text">小视频</a> </div>
+            <div class="tab"><a href="#" class="tab-text">图片</a> </div>
+            <div class="tab"><a href="#" class="tab-text">专栏</a> </div>
+        </div>
+        <div id="cards" class="cards">
+        <div class="card" id="card">
+        <a href="#" class="user-head" style="border-radius: 50%;"><img src="image/card1.webp"></a>
+        <a href="#" class="user-name">kaka</a>
+        <a href="#" class="time">09-10</a>
+        <button id="focus" type="button" class="btn btn-default" style="position:relative;margin-left: 540px;margin-top:0px;width: 70px;">+ 关注</button>
+        <div class="content">
+            <div class="text">名字过于沙雕....</div>
+            <div class="content-zoom">
+                <div class="imgbox"><img src="image/content1.png"style="width: 100%;height: 100%;border-radius: 4px;margin-top:5px;"></div>
+            </div>
+        </div>
+        <div class="button-bar">
+            <a class="frow"> <span class="glyphicon glyphicon-share button-bar-plus" style="color: rgb(255, 142, 143);font-size: 18px;margin-left: 0px;">2</span></a>
+            <a class="commit"><span class="glyphicon glyphicon-comment button-bar-plus" style="color: rgb(255, 142, 143); font-size: 18px;">10</span></a>
+            <a class="praise"><span class="glyphicon glyphicon-thumbs-up button-bar-plus" style="color: rgb(255, 142, 143); font-size: 18px;"@click = "counter++">{{counter}}</span></a>
+        </div>
+        <div class="frow-panel">
+            <div class="frow-text"><textarea class="textarea" placeholder="请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。"></textarea>
+                <button type="button" class="btn btn-primary btn-sm frow-button">转发</button>
+                <div class="f-face"><a href="#"><img src="image/face.png" class="face"></a></div>
+                <div class="frow-list">
+                    <div class="list-item">
+                        <div class="fl-face"><a href="#"><img src="image/face.png" class="face"></a></div>
+                        <div class="item-name"><a href="#">科科</a></div>
+                        <div class="item-text">一天天的干啥呢，不出shipin，也不zhibo</div>
+                        <div class="item-info">
+                            <span class="item-time">2小时前</span>
+                            <a href="#" class="info-fr">转发</a>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="fl-face"><a href="#"><img src="image/face.png" class="face"></a></div>
+                        <div class="item-name"><a href="#">Kaka</a></div>
+                        <div class="item-text">youku is well</div>
+                        <div class="item-info">
+                            <span class="item-time">09-08</span>
+                            <a href="#" class="info-fr">转发</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="frow-more">
+                    <a class="item-nomore">没有更多啦(〜￣△￣)〜</a>
+                </div>
+            </div>
+        </div>
+        <div class="commit-panel" >
+            <div class="frow-text"><textarea class="textarea" placeholder="请自觉遵守互联网相关的政策法规，严禁发布色情、暴力、反动的言论。"></textarea>
+                <button type="button" class="btn btn-primary btn-sm frow-button">评论</button>
+                <div class="f-face"><a href="#"><img src="image/face.png" class="face"></a></div>
+                <div class="frow-list">
+                    <div class="list-item">
+                        <div class="fl-face"><a href="#"><img src="image/face.png" class="face"></a></div>
+                        <div class="item-name"><a href="#">科科</a></div>
+                        <div class="item-text">一天天的干啥呢，不出shipin，也不zhibo</div>
+                        <div class="item-info">
+                            <span class="item-time">2小时前</span>
+                            <a href="#" class="info-fr">评论</a>
+                        </div>
+                    </div>
+                    <div class="list-item">
+                        <div class="fl-face"><a href="#"><img src="image/face.png" class="face"></a></div>
+                        <div class="item-name"><a href="#">Kaka</a></div>
+                        <div class="item-text">youku is well</div>
+                        <div class="item-info">
+                            <span class="item-time">09-08</span>
+                            <a href="#" class="info-fr">评论</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="frow-more">
+                    <a class="item-nomore">点击加载更多(〜￣△￣)〜</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="login-panel"></div>
+    </div>
+</div>
+</body>
+</html>

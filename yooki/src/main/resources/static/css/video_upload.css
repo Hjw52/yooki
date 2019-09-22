@@ -1,0 +1,39 @@
+#body{
+    width: 1000px;
+    height: 800px;
+    /*background-color: white;*/
+    text-align: center;
+    margin: 0 auto;
+}
+#s_body{
+    width: 800px;
+    height: 700px;
+    /*background-color: #cccccc;*/
+    text-align: center;
+    margin: 0 auto;
+}
+#title{
+    width: 798px;
+    height: 400px;
+    float: left;
+    margin-top: 100px;
+    background-color:white;
+    border: 1px solid black;
+}
+#video_upload{
+    float: left;
+    margin-top: 200px;
+    margin-left: 300px;
+}
+/*#video_upload .submit{*/
+/*    float: left;*/
+/*    margin-left: 80px;*/
+/*    border: 1px solid black;*/
+/*}*/
+#upload_btn{
+    float: left;
+    margin-top: 250px;
+    margin-left: -190px;
+    border: 1px solid black;
+
+}

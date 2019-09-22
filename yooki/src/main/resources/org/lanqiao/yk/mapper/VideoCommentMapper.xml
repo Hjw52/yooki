@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.yk.mapper.VideoCommentMapper" >
+  <resultMap id="VideoCommentResultMap" type="org.lanqiao.yk.entity.VideoComment" >
+    <id column="comment_id" property="commentId" jdbcType="INTEGER" />
+    <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
+    <result column="comment_ time" property="commentTime" jdbcType="TIMESTAMP" />
+    <result column="like_number" property="likeNumber" jdbcType="INTEGER" />
+    <result column="dislike_number" property="dislikeNumber" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="video_id" property="videoId" jdbcType="INTEGER" />
+    <association property="userInfo" resultMap="UserInfoResultMap"/>
+  </resultMap>
+  <resultMap id="UserInfoResultMap" type="org.lanqiao.yk.entity.UserInfo" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_intro" property="userIntro" jdbcType="VARCHAR" />
+    <result column="face_pic" property="facePic" jdbcType="VARCHAR" />
+    <result column="user_url" property="userUrl" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="telephone" property="telephone" jdbcType="DECIMAL" />
+  </resultMap>
+<!--  点赞-->
+  <update id="like" parameterType="java.lang.Integer">
+    update video_comment set like_number = like_number+1 where comment_id=#{commentId}
+  </update>
+<!--  踩-->
+  <update id="dislike" parameterType="java.lang.Integer">
+    update video_comment set dislike_number = dislike_number+1 where comment_id=#{commentId}
+  </update>
+<!--获得所有评论-->
+  <select id="getAllComment" resultMap="VideoCommentResultMap" parameterType="java.lang.Integer">
+  select u.user_id,comment_id,user_name,face_pic,comment_content,`comment_ time`,like_number,dislike_number from user_info u,video_comment v where video_id=#{videoId} and u.user_id=v.user_id order by `comment_ time` desc
+  </select>
+
+  <sql id="Base_Column_List" >
+    comment_id, comment_content, "comment_ time", like_number, dislike_number, user_id, 
+    video_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="VideoCommentResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from video_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from video_comment
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.yk.entity.VideoComment" >
+    insert into video_comment (comment_id, comment_content, "comment_ time", 
+      like_number, dislike_number, user_id, 
+      video_id)
+    values (#{commentId,jdbcType=INTEGER}, #{commentContent,jdbcType=VARCHAR}, #{commentTime,jdbcType=TIMESTAMP}, 
+      #{likeNumber,jdbcType=INTEGER}, #{dislikeNumber,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{videoId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.yk.entity.VideoComment" >
+    insert into video_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+      <if test="commentTime != null" >
+        "comment_ time",
+      </if>
+      <if test="likeNumber != null" >
+        like_number,
+      </if>
+      <if test="dislikeNumber != null" >
+        dislike_number,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="videoId != null" >
+        video_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null" >
+        #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="likeNumber != null" >
+        #{likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dislikeNumber != null" >
+        #{dislikeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.yk.entity.VideoComment" >
+    update video_comment
+    <set >
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentTime != null" >
+        "comment_ time" = #{commentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="likeNumber != null" >
+        like_number = #{likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dislikeNumber != null" >
+        dislike_number = #{dislikeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="videoId != null" >
+        video_id = #{videoId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.yk.entity.VideoComment" >
+    update video_comment
+    set comment_content = #{commentContent,jdbcType=VARCHAR},
+      "comment_ time" = #{commentTime,jdbcType=TIMESTAMP},
+      like_number = #{likeNumber,jdbcType=INTEGER},
+      dislike_number = #{dislikeNumber,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      video_id = #{videoId,jdbcType=INTEGER}
+    where comment_id = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

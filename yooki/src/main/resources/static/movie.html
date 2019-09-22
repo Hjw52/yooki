@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频播放页</title>
+    <link rel="stylesheet" href="css/movie.css">
+    <link rel="stylesheet" href="css/input美化.css">
+    <script type="text/javascript" src="wangEditor-3.1.1/release/wangEditor.min.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/Color.js"></script>
+<!--    <script src="js/RangeSlider.js"></script>-->
+    <script src="js/canvasBarrage.js"></script>
+    <script src="js/myUtil.js"></script>
+    <script>
+        var comments=[];
+        var count;
+        var maxPage;
+        var pageNum=1;
+        var pageSize=10;
+        var x;
+        var cId;
+        var uId=sessionStorage.getItem("userId");
+        var vId=decodeURI(getUrlParam("videoId"));
+        var countReply;
+        var jj=0;
+        var kk=0;
+        function maxSpan(maxPage) {
+            $(".pageSpan").remove();
+            for(var i=1;i<maxPage+1;i++){
+                $pageSpan=("<div class=\"pageSpan f2692ff\" onclick=\"pageSpanCss(this.innerHTML)\">"+i+"</div>");
+                $(".lastPage").after($pageSpan);
+                // $(".allPageSpan").children().addClass("pageSpan");
+            }
+        }
+        function pageSpanCss(obj) {
+            $(".pageSpan").css("color","#2692ff");
+            $(".pageSpan").css("background-color","white");
+            var b=$(".pageSpan").length;
+            for (var i=0;i<b;i++){
+                if($(".pageSpan:eq("+i+")").html()==obj){
+                    $(".pageSpan:eq("+i+")").css("color","white");
+                    $(".pageSpan:eq("+i+")").css("background-color","#C6C6C6");
+                }
+            }
+            pageNum=obj;
+            $(".pageJump").css("color","#2692ff");
+            if(pageNum==1){
+                $(".lastPage").css("color","#c6c6c6");
+            }else if(pageNum==maxPage){
+                $(".nextPage").css("color","#c6c6c6");
+            }
+            pageHelper();
+            putReply();
+        }
+        function PrefixInteger(num){
+            if(num<10){
+                return ('0'+num).slice(-10);
+            }else{
+                return num;
+            }
+        }
+        function gettime(t){
+            var _time=new Date(t);
+            var   year=_time.getFullYear();//2017
+            var   month=_time.getMonth()+1;//7
+            var   date=_time.getDate();//10
+            var   hour=_time.getHours();//10
+            var   minute=_time.getMinutes();//56
+            var   second=_time.getSeconds();//15
+            return   year+"年"+month+"月"+date+"日   "+hour+":"+minute+":"+PrefixInteger(second);//这里自己按自己需要的格式拼接
+        }
+        function getAccurateTime(date){
+            var timeSpan=new Date().getTime()-new Date(date).getTime();
+            if (timeSpan<3600000){
+                return parseInt(timeSpan/60000)+"分钟前";
+            }else if (timeSpan>3600000&timeSpan<86400000){
+                return parseInt(timeSpan/3600000)+"小时前";
+            }else if(timeSpan>86400000&timeSpan<604800000){
+                return parseInt(timeSpan/86400000)+"天前";
+            }else if(timeSpan>604800000&timeSpan<1814400000){
+                return parseInt(timeSpan/604800000)+"周前";
+            }else{
+                return gettime(date);
+            }
+        }
+        function getMaxPage() {
+            if((count/pageSize-parseInt(count/pageSize))<1&count%pageSize>0){
+                maxPage=parseInt(count/pageSize)+1;
+            }else {
+                maxPage=parseInt(count/pageSize);
+            }
+        }
+        function pageHelper(){
+            $(".comment").detach();
+            count=comments.length;
+            getMaxPage();
+            if(pageNum==maxPage){
+                for(jj=(pageNum-1)*pageSize;jj<count;jj++){
+                    $.ajax({
+                        url:"/getAllViReply",
+                        type:"post",
+                        async:false,
+                        data:{
+                            userId:uId,
+                            commentId:comments[jj].commentId,
+                        },
+                        dataType:"json",
+                        success:function (data) {
+                            console.log(data);
+                            console.log(comments[jj]);
+                            countReply=data.length;
+                            var date=comments[jj].commentTime;
+                            var $comment=$("<div class=\"comment\">\n" +
+                                "                <img style=\"width: 50px;height: 50px;border-radius: 100%\" src=\""+comments[jj].userInfo.facePic+"\">\n" +
+                                "                <div class=\"comment_right\">\n" +
+                                "                    <div class=\"comment_user_info\"><a href=\"#\" class=\"f14 f2692ff\">"+comments[jj].userInfo.userName+"</a><a href=\"#\"><img src=\"image/VIP.svg\" style=\"width: 20px;margin-left: 5px\"></a><span class=\"f12 bbbbbb\">"+getAccurateTime(date)+"</span></div>\n" +
+                                "                    <div class=\"comment_content f14\">"+comments[jj].commentContent+"</div>\n" +
+                                "                    <div class=\"like_dis\">\n" +
+                                "                        <img class=\"img5\" src=\"image/赞_灰色.svg\" style=\"width: 21px\"><span class=\"bbbbbb\">"+comments[jj].likeNumber+"</span>\n" +
+                                "                        <img class=\"img6\" src=\"image/赞_灰色.svg\" style=\"width: 21px;margin-left: 10px;transform: rotate(180deg);\"><span class=\"bbbbbb\">"+comments[jj].dislikeNumber+"</span>\n" +
+                                "<span class=\"cId\" style=\"display: none\">"+comments[jj].commentId+"</span>\n"+
+                                "                        <img class=\"img7\" src=\"image/说话气泡.svg\" style=\"width: 21px;margin-left: 10px\"><span class=\"bbbbbb\">"+countReply+"</span>\n" +
+                                "                    </div>\n" +
+                                "                </div>\n" +
+                                "            </div>");
+                            $("#comments").append($comment);
+                        }
+                    })
+                }
+                $(".currentPage").html(pageNum);
+                $(".maxPage").html(maxPage);
+            }else{
+                for(kk=(pageNum-1)*pageSize;kk<pageNum*pageSize;kk++){
+                    $.ajax({
+                        url:"/getAllViReply",
+                        type:"post",
+                        async:false,
+                        data:{
+                            userId:uId,
+                            commentId:comments[kk].commentId,
+                        },
+                        dataType:"json",
+                        success:function (data) {
+                            countReply=data.length;
+                            var date=comments[kk].commentTime;
+                            var $comment=$("<div class=\"comment\">\n" +
+                                "                <img style=\"width: 50px;height: 50px;border-radius: 100%\" src=\""+comments[kk].userInfo.facePic+"\">\n" +
+                                "                <div class=\"comment_right\">\n" +
+                                "                    <div class=\"comment_user_info\"><a href=\"#\" class=\"f14 f2692ff\">"+comments[kk].userInfo.userName+"</a><a href=\"#\"><img src=\"image/VIP.svg\" style=\"width: 20px;margin-left: 5px\"></a><span class=\"f12 bbbbbb\">"+getAccurateTime(date)+"</span></div>\n" +
+                                "                    <div class=\"comment_content f14\">"+comments[kk].commentContent+"</div>\n" +
+                                "                    <div class=\"like_dis\">\n" +
+                                "                        <img class=\"img5\" src=\"image/赞_灰色.svg\" style=\"width: 21px\"><span class=\"bbbbbb\">"+comments[kk].likeNumber+"</span>\n" +
+                                "                        <img class=\"img6\" src=\"image/赞_灰色.svg\" style=\"width: 21px;margin-left: 10px;transform: rotate(180deg);\"><span class=\"bbbbbb\">"+comments[kk].dislikeNumber+"</span>\n" +
+                                "<span class=\"cId\" style=\"display: none\">"+comments[kk].commentId+"</span>\n"+
+                                "                        <img class=\"img7\" src=\"image/说话气泡.svg\" style=\"width: 21px;margin-left: 10px\"><span class=\"bbbbbb\">"+countReply+"</span>\n" +
+                                "                    </div>\n" +
+                                "                </div>\n" +
+                                "            </div>");
+                            $("#comments").append($comment);
+                        }
+                    })
+                }
+                $(".currentPage").html(pageNum);
+                $(".maxPage").html(maxPage);
+            }
+        }
+        function getAllReply(){
+            $.ajax({
+                url:"/getAllViReply",
+                type:"post",
+                data:{
+                    commentId:cId
+                },
+                dataType:"json",
+                success:function (data) {
+                    console.log(data);
+                    countReply=data.length;
+                    for(var i=0;i<data.length;i++){
+                        var date=data[i].replyTime;
+                        $inComment=$("<div class=\"inComment\">\n" +
+                            "                    <img src=\""+data[i].userInfo.facePic+"\" style=\"width: 32px;height: 32px;border-radius: 100%;margin-left: 15px;padding-top: 10px\"><span class=\"f14 ff3300\" style=\"margin-left: 5px;position: relative;top:-5px\">"+data[i].userInfo.userName+"</span><span class=\"f14\" style=\"margin-left: 5px;position: relative;top:-5px\">"+data[i].replyContent+"</span><br><span style=\"margin-left: 18px;margin-top: 5px\">"+getAccurateTime(date)+"</span>\n" +
+                            "                </div>");
+                        $("#blank").after($inComment);
+                    }
+                }
+            })
+        }
+        function getAllComment(){
+            $.ajax({
+                url:"/getAllComment",
+                type:"post",
+                data:{
+                    videoId:vId
+                },
+                dataType:"json",
+                success:function (data) {
+                    console.log(data)
+                    comments=[];
+                    for (var i=0;i<data.length;i++){
+                        comments.push(data[i]);
+                    }
+                    pageHelper();
+                    maxSpan(maxPage);
+                    if($("#includeComments").length>0){
+                        x=$("#includeComments").detach();
+                    }
+                    $(".img7").on('click',function () {
+                        if($(this).parent().parent().parent().after()==x){
+                            $("#includeComments").detach();
+                        }else{
+                            $(this).parent().parent().parent().after(x);
+                            $(".inComment").remove();
+                            cId=$(this).prev().text();
+                            getAllReply();
+                        }
+                        $("#includeComments").toggle();
+                    })
+                    $(".img5").on('click',function () {
+                        cId=$(this).next().next().next().next().text();
+                        $.ajax({
+                            url:"/like",
+                            type:"post",
+                            data:{
+                                commentId:cId
+                            },
+                            dataType:"json",
+                            success:function (data) {
+                                getAllComment();
+                            }
+                        });
+                    });
+                    $(".img6").on('click',function () {
+                        cId=$(this).next().next().text();
+                        console.log(cId);
+                        $.ajax({
+                            url:"/dislike",
+                            type:"post",
+                            data:{
+                                commentId:cId
+                            },
+                            dataType:"json",
+                            success:function (data) {
+                                getAllComment();
+                            }
+                        });
+                    });
+                }
+            });
+
+        }
+        function putReply(){
+            $(".img7").on('click',function () {
+                if($(this).parent().parent().parent().after()==x){
+                    $("#includeComments").detach();
+                }else{
+                    $(this).parent().parent().parent().after(x);
+                    $(".inComment").remove();
+                    cId=$(this).prev().text();
+                    getAllReply();
+                }
+                $("#includeComments").toggle();
+            })
+            $(".img5").on('click',function () {
+                cId=$(this).next().next().next().next().text();
+                console.log(cId);
+                $.ajax({
+                    url:"/like",
+                    type:"post",
+                    data:{
+                        commentId:cId
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                        getAllComment();
+                    }
+                });
+            });
+            $(".img6").on('click',function () {
+                cId=$(this).next().next().text();
+                console.log(cId);
+                $.ajax({
+                    url:"/dislike",
+                    type:"post",
+                    data:{
+                        commentId:cId
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                        getAllComment();
+                    }
+                });
+            });
+        }
+        $(function () {
+            //wangEditor初始化
+            var E = window.wangEditor;
+            var editor = new E("#comment_editor1","#comment_editor2");
+            editor.customConfig.menus = [
+                'emoticon',  // 表情
+            ];
+            editor.create();
+            var editor2=new E("#comment_editor3","#comment_editor4");
+            editor2.customConfig.menus = [
+                'emoticon',  // 表情
+            ];
+            editor2.create();
+            //加历史记录
+            $(window).unload(function(){
+                $.ajax({
+                    url:"/insertHistory",
+                    type:"post",
+                    data:{
+                        userId:uId,
+                        videoId:vId
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                    }
+                })
+            })
+            //6获取头像
+            $.ajax({
+                url:"/selectByPrimaryKey",
+                type:"post",
+                data:{
+                    userId:uId,
+                },
+                dataType:"json",
+                success:function (data) {
+                    console.log(data);
+                    if (data.facePic==""){
+                        $("#facePic").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#facePic").attr("src", data.facePic);
+                    }
+                }
+            })
+            //5视频信息
+            //获取视频信息
+            $.ajax({
+                url:"/getVideo",
+                type:"post",
+                data:{
+                    videoId:vId
+                },
+                dataType:"json",
+                success:function (data) {
+                    console.log(data)
+                    $("#movieName a:eq(0)").html(data.videoName);
+                    $(".ab_title_hover:eq(0)").html(data.videoName);
+                    $(".ab_title_hover:eq(1)").html(data.userInfo.userName);
+                    $("#title_desc").css("src",data.userInfo.facePic);
+                    $("#idol").html(data.userInfo.userId);
+                    $video=$("<source src=\""+data.videoPicMov.videoMov+"\" type=\"video/mp4\" />\n" +
+                        "                    <object data=\""+data.videoPicMov.videoMov+"\" width=\"320\" height=\"240\">");
+                    $("#video").append($video);
+                    //打开显示是否关注
+                    $.ajax({
+                        url:"/checkFocus",
+                        type:"post",
+                        data:{
+                            fansId:uId,
+                            idolId:$("#idol").html()
+                        },
+                        dataType:"json",
+                        success:function (data) {
+                            if(data==1||data=="1"){
+                                $("#title_desc span:eq(2)").html("已关注");
+                            }else{
+                                $("#title_desc span:eq(2)").html("关注");
+                            }
+                        }
+                    });
+                }
+            });
+            //视频播放量
+            $.ajax({
+                url:"/addBrowse",
+                type:"post",
+                data:{
+                    videoId:vId
+                },
+                dataType:"json",
+                success:function (data) {
+                }
+            });
+            //关注------------------------------------------------------------------------------
+            //点击关注关注
+            $("#title_desc span:eq(2)").click(function () {
+                $.ajax({
+                    url:"/checkFocus",
+                    type:"post",
+                    data:{
+                        fansId:uId,
+                        idolId:$("#idol").html()
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                        if(data==0){
+                            $.ajax({
+                                url:"/addFocus",
+                                type:"post",
+                                data:{
+                                    fansId:uId,
+                                    idolId:$("#idol").html()
+                                },
+                                dataType:"json",
+                                success:function (data) {
+                                }
+                            });
+                            $("#title_desc span:eq(2)").html("已关注");
+                        }else{
+                            $.ajax({
+                                url:"/deleteFocus",
+                                type:"post",
+                                data:{
+                                    fansId:uId,
+                                    idolId:$("#idol").html()
+                                },
+                                dataType:"json",
+                                success:function (data) {
+                                }
+                            });
+                            $("#title_desc span:eq(2)").html("关注");
+                        }
+                    }
+                });
+            })
+            //收藏------------------------------------------------------------------------------
+            //打开显示是否收藏
+            $.ajax({
+                url:"/checkCollect",
+                type:"post",
+                data:{
+                    videoId:vId,
+                    userId:uId
+                },
+                dataType:"json",
+                success:function (data) {
+                    if(data==0){
+                        $("#MovieBottomLeft li:eq(2) div").css("background-position","-350px 0px");
+                    }else{
+                        $("#MovieBottomLeft li:eq(2) div").css("background-position","-330px 0px");
+                    }
+                }
+            });
+            //点击收藏收藏
+            $("#MovieBottomLeft li:eq(2)").click(function () {
+                $.ajax({
+                    url:"/checkCollect",
+                    type:"post",
+                    data:{
+                        videoId:vId,
+                        userId:uId
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                        if(data==0){
+                            $.ajax({
+                                url:"/addCollect",
+                                type:"post",
+                                data:{
+                                    videoId:vId,
+                                    userId:uId
+                                },
+                                dataType:"json",
+                                success:function (data) {
+                                }
+                            });
+                            $("#MovieBottomLeft li:eq(2) div").css("background-position","-330px 0px");
+                        }else{
+                            $.ajax({
+                                url:"/deleteCollect",
+                                type:"post",
+                                data:{
+                                    videoId:vId,
+                                    userId:uId
+                                },
+                                dataType:"json",
+                                success:function (data) {
+                                }
+                            });
+                            $("#MovieBottomLeft li:eq(2) div").css("background-position","-350px 0px");
+                        }
+                    }
+                });
+            });
+            //4评论-----------------------------------------------------------------------------
+            $("#comment_doSubmit").click(function () {
+                var content = editor.txt.text();
+                $.ajax({
+                    url:"/vCommentSubmit",
+                    type:"post",
+                    data:{
+                        commentContent:content,
+                        userId:uId,
+                        videoId:vId
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                        maxPage++;
+                        getAllComment();
+                    }
+                })
+                editor.txt.html("");
+            });
+            $("#inCommentSubmit").click(function () {
+                cId=$("#includeComments").prev().find(".cId").html();
+                $(".inComment").remove();
+                var content = editor2.txt.text();
+                $.ajax({
+                    url:"/insertViReply",
+                    type:"post",
+                    data:{
+                        replyContent:content,
+                        userId:uId,
+                        commentId:cId
+                    },
+                    dataType:"json",
+                    success:function (data) {
+                        $.ajax({
+                            url:"/getAllViReply",
+                            type:"post",
+                            data:{
+                                userId:uId,
+                                commentId:cId,
+                            },
+                            dataType:"json",
+                            success:function (data) {
+                                console.log(data);
+                                var m=data[0].commentId;
+                                var n=parseInt(data.length);
+                                var b=$(".cId").length;
+                                for (var i=0;i<b;i++){
+                                    if($(".cId:eq("+i+")").html()==m){
+                                        $(".cId:eq("+i+")").next().next().html(n);
+                                    }
+                                }
+                                for(var i=0;i<data.length;i++){
+                                    var date=data[i].replyTime;
+                                    $inComment=$("<div class=\"inComment\">\n" +
+                                        "                    <img src=\"image/头像demo.png\" style=\"width: 32px;height: 32px;border-radius: 100%;margin-left: 15px;padding-top: 10px\"><span class=\"f14 ff3300\" style=\"margin-left: 5px;position: relative;top:-5px\">我</span><span class=\"f14\" style=\"margin-left: 5px;position: relative;top:-5px\">"+data[i].replyContent+"</span><br><span style=\"margin-left: 18px;margin-top: 5px\">"+getAccurateTime(date)+"</span>\n" +
+                                        "                </div>");
+                                    $("#blank").after($inComment);
+                                }
+                            }
+                        })
+                    }
+                })
+                editor2.txt.html("");
+            })
+            // style="color: white;background-color: #C6C6C6"
+            $(".lastPage").click(function () {
+                if(pageNum>1){
+                    pageNum--;
+                    pageHelper();
+                    putReply();
+                    $(".pageSpan").css("color","#2692ff");
+                    $(".pageSpan").css("background-color","white");
+                    var b=$(".pageSpan").length;
+                    for (var i=0;i<b;i++){
+                        if($(".pageSpan:eq("+i+")").html()==pageNum){
+                            $(".pageSpan:eq("+i+")").css("color","white");
+                            $(".pageSpan:eq("+i+")").css("background-color","#C6C6C6");
+                        }
+                    }
+                }
+            });
+            $(".nextPage").click(function () {
+                if(pageNum<maxPage){
+                    pageNum++;
+                    pageHelper();
+                    putReply();
+                    $(".pageSpan").css("color","#2692ff");
+                    $(".pageSpan").css("background-color","white");
+                    var b=$(".pageSpan").length;
+                    for (var i=0;i<b;i++){
+                        if($(".pageSpan:eq("+i+")").html()==pageNum){
+                            $(".pageSpan:eq("+i+")").css("color","white");
+                            $(".pageSpan:eq("+i+")").css("background-color","#C6C6C6");
+                        }
+                    }
+                }
+            });
+            $(".pageJump").click(function () {
+                $(".pageJump").css("color","#2692ff");
+                if(pageNum==1||pageNum==maxPage){
+
+                    $(this).css("color","#c6c6c6");
+                }
+            });
+            $('body').click(function(e) {
+                if (e.target.tagName == 'BODY'||e.target.className =='pageSpan f2692ff'){
+                    $("#includeComments").css("display","none");
+                }
+            });
+            getAllComment();
+            //1.弹幕初始化----------------------------------------------------------------------------
+            var eleCanvas;
+            var eleVideo;
+            var demoBarrage;
+            //弹幕设置
+            // $('.range').range();
+            // $('#color').color();
+            //弹幕数据
+             var dataBarrage= [];
+            $.ajax({
+                url:"/getAllBarrage",
+                type:"post",
+                data:{
+                    videoId: vId,
+                },
+                dataType:"json",
+                success:function (data) {
+                    for(var i = 0;i<data.length;i++){
+                        // console.log(data[i]);
+                        dataBarrage.push(data[i]);
+                    }
+                    // 初始化弹幕方法
+                    eleCanvas = document.getElementById('canvasBarrage');
+                    eleVideo = document.getElementById("video");
+
+                    demoBarrage = new CanvasBarrage(eleCanvas, eleVideo, {
+                        data: dataBarrage
+                    });
+                }
+            });
+
+            // 下面是交互处理，与弹幕方法本身无关，旨在演示如何修改全局设置，新增弹幕等
+            // 1. 全局的弹幕大小，位置和透明度处理
+                $('.range').on('change', function () {
+                    // 改变弹幕的透明度和字号大小
+                    demoBarrage[this.name] = this.value * 1;
+                });
+
+                $('input[name="range"]').on('click', function () {
+                    // 改变弹幕在视频显示的区域范围
+                    demoBarrage['range'] = this.value.split(',');
+                });
+
+                // 发送弹幕
+                var elForm = $('#barrageForm'), elInput = $('#input');
+                elForm.on('submit', function (event) {
+                    event.preventDefault();
+                    // 新增弹幕
+                    var value=$('#input').val();
+                    var color=$('#color').val();
+                    var time=document.getElementById("video").currentTime;
+                    demoBarrage.add({
+                        value: value,
+                        color: color,
+                        time: time,
+                    });
+                    $.ajax({
+                        url:"/insertBarrage",
+                        type:"post",
+                        data:{
+                            value: value,
+                            color: color,
+                            time: time,
+                            videoId:vId,
+                            userId:uId
+                        },
+                        dataType:"json",
+                        success:function (data) {
+                        }
+                    });
+                    elInput.val('').trigger('input');
+                    $("#submit1").attr("value","发送");
+                });
+                // 提交按钮
+                var elSubmit = elForm.find('input[type="submit"]');
+
+                // 输入框和禁用按钮
+                elInput.on('input', function () {
+                    if (this.value.trim()) {
+                        elSubmit.removeAttr('disabled');
+                        elSubmit.css("color","white")
+                    } else {
+                        elSubmit.attr('disabled', 'disabled');
+                        elSubmit.css("color","#999999");
+                    }
+                });
+            //弹幕设置
+            $("#barrageSetting").hover(function () {
+                $("#inBarrageSetting").fadeIn(100);
+            })
+            $("#MovieBottomRight").mouseleave(function () {
+                $("#inBarrageSetting").fadeOut(100);
+            });
+            // $('#range1').RangeSlider({ min: 0,   max: 100,  step: 1,  callback: ''});
+            // $('#range2').RangeSlider({ min: 16,   max: 32,  step: 1,  callback: ''});
+            //2.滑动滚动条----------------------------------------------------------------------------
+            $(window).scroll(function(){
+            // 滚动条距离顶部的距离 大于 200px时
+                if($(window).scrollTop() >= 743){
+                    $("#top_search").css("position","fixed");
+                    $("#top_search").css("top","0px");
+                    $("#top_search").css("left","158.6px");
+                    $("#top_search").css("background-color","white");
+                    $("#top_search").css("border","#074A99 0px solid");
+                    $("#top_search").css("-webkit-box-shadow","0px 1px 0px 0px #2b93fd");
+                    $("#top_search").css("z-index","999999");
+                    $("#top_search input").css("color","#393939");
+                    $("#top_search input").css("background-color","white");
+                    $("#top_search input").css("border","1px solid #2b93fd");
+                    $("#top_search input").css("height","36px");
+                    $("#search_list ul:eq(0) li a").css("color","#363636");
+                    $("#search_list_hover").css("left","-160px");
+                    document.getElementById("img0").src="image/块列表灰.svg";
+                } else{
+                    $("#top_search").css("position","static");
+                    $("#top_search").css("background-color","#27272F");
+                    $("#top_search input").css("color","white");
+                    $("#top_search input").css("background-color","#636367");
+                    $("#top_search input").css("border","0px");
+                    $("#top_search input").css("height","38px");
+                    $("#search_list ul:eq(0) li a").css("color","white");
+                    $("#search_list ul:eq(0) li:last a").css("color","#363636");
+                    $("#search_list_hover").css("left","0px");
+                    document.getElementById("img0").src="image/块列表白.svg";
+                }
+            });
+            //3.样式变化----------------------------------------------------------------------------
+            $("#inMovie").mouseleave(function () {
+                $("#chooseSpeed").css("display","none")
+            });
+            $("#inMovie").mouseenter(function () {
+                $("#chooseSpeed").css("display","block")
+            });
+            $("body input").click(function () {
+                $(this).val("");
+            })
+            //img hover
+            $("#search_list_doHover").hover(function () {
+                document.getElementById("img0").src="image/块列表蓝.svg";
+            })
+            $("#search_list_doHover").mouseleave(function () {
+                document.getElementById("img0").src="image/块列表白.svg";
+            })
+            $("#icon_sub").hover(function () {
+                document.getElementById("img1").src="image/信号1_hover.svg";
+            })
+            $("#icon_sub").mouseleave(function () {
+                document.getElementById("img1").src="image/信号1.svg";
+            })
+            $("#icon_record").hover(function () {
+                document.getElementById("img2").src="image/时钟_hover.svg";
+            })
+            $("#icon_record").mouseleave(function () {
+                document.getElementById("img2").src="image/时钟.svg";
+            })
+            $("#icon_upload").hover(function () {
+                document.getElementById("img3").src="image/向上-排序_hover.svg";
+            })
+            $("#icon_upload").mouseleave(function () {
+                document.getElementById("img3").src="image/向上-排序.svg";
+            })
+            $("#icon_app").hover(function () {
+                document.getElementById("img4").src="image/电脑%20pc%20显示器_hover.svg";
+            })
+            $("#icon_app").mouseleave(function () {
+                document.getElementById("img4").src="image/电脑%20pc%20显示器.svg";
+            })
+            $(".img5").hover(function () {
+                var url = $(".img5").attr("src").replace("image/赞_灰色.svg","image/赞%20_红色.svg");
+                $(this).attr("src",url);
+            })
+            $(".img5").mouseleave(function () {
+                var url = $(".img5").attr("src").replace("image/赞%20_红色.svg","image/赞_灰色.svg");
+                $(this).attr("src",url);
+            })
+            $(".img6").hover(function () {
+                var url = $(".img6").attr("src").replace("image/赞_灰色.svg","image/赞_蓝色.svg");
+                $(this).attr("src",url);
+            })
+            $(".img6").mouseleave(function () {
+                var url = $(".img6").attr("src").replace("image/赞_蓝色.svg","image/赞_灰色.svg");
+                $(this).attr("src",url);
+            })
+            $(".img7").hover(function () {
+                var url = $(".img7").attr("src").replace("image/说话气泡.svg","image/说话气泡_hover.svg");
+                $(this).attr("src",url);
+            })
+            $(".img7").mouseleave(function () {
+                var url = $(".img7").attr("src").replace("image/说话气泡_hover.svg","image/说话气泡.svg");
+                $(this).attr("src",url);
+            })
+            //速度选择
+            $("#video").hover(function () {
+                $("#chooseSpeed").css("display","block");
+            });
+            $("#chooseSpeed").click(function () {
+                $("#inChooseSpeed").fadeIn(100);
+                $("#chooseSpeed").css("background-color","rgba(0,0,0,0.5)")
+            })
+            $("#inChooseSpeed").mouseleave(function () {
+                $("#inChooseSpeed").fadeOut(100);
+                $("#chooseSpeed").css("background-color","initial")
+            })
+            $("#allSpeed").mouseleave(function () {
+                $("#inChooseSpeed").fadeOut(100);
+                $("#chooseSpeed").css("background-color","initial")
+            })
+            $("#inChooseSpeed a").click(function () {
+                $("#inChooseSpeed a").css("color","white");
+                $(this).css("color","#35b5ff");
+                var speed = $(this).html();//设置速度
+                var vdo = document.getElementById("video");//获取id
+                vdo.playbackRate = speed;//改变速度
+            })
+            //背景图片 hover
+            $("#MovieBottomLeft li:eq(0)").hover(function () {
+                $("#MovieBottomLeft li:eq(0) div").css("background-position","-310px 0px")
+            })
+            $("#MovieBottomLeft li:eq(0)").mouseleave(function () {
+                $("#MovieBottomLeft li:eq(0) div").css("background-position","-290px 0px")
+            })
+            $("#MovieBottomLeft li:eq(1)").hover(function () {
+                $("#MovieBottomLeft li:eq(1) div").css("background-position","-210px 0px")
+            })
+            $("#MovieBottomLeft li:eq(1)").mouseleave(function () {
+                $("#MovieBottomLeft li:eq(1) div").css("background-position","-230px 0px")
+            })
+            // $("#MovieBottomLeft li:eq(2)").hover(function () {
+            //     $("#MovieBottomLeft li:eq(2) div").css("background-position","-330px 0px")
+            // })
+            // $("#MovieBottomLeft li:eq(2)").mouseleave(function () {
+            //     $("#MovieBottomLeft li:eq(2) div").css("background-position","-350px 0px")
+            // })
+            $("#MovieBottomLeft li:eq(3)").hover(function () {
+                $("#MovieBottomLeft li:eq(3) div").css("background-position","-30px -20px")
+            })
+            $("#MovieBottomLeft li:eq(3)").mouseleave(function () {
+                $("#MovieBottomLeft li:eq(3) div").css("background-position","-50px -20px")
+            })
+            $("#MovieBottomLeft li:eq(4)").hover(function () {
+                $("#MovieBottomLeft li:eq(4) div").css("background-position","-130px 0px")
+            })
+            $("#MovieBottomLeft li:eq(4)").mouseleave(function () {
+                $("#MovieBottomLeft li:eq(4) div").css("background-position","-150px 0px")
+            })
+            //弹幕开关
+            $("#barrageOn").click(function () {
+                if( $(this).css("background-position")=="-130px -20px"){
+                    $("#barrageOn").css("background-position","-90px -20px");
+                    $("#canvasBarrage").css("display","none");
+                }else {
+                    $("#barrageOn").css("background-position","-130px -20px");
+                    $("#canvasBarrage").css("display","inline");
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="top">
+    <div id="top_search">
+        <a href="homepage.html"><div id="search_youKu"><img src="image/youku图标主要.png" style="width: 120px"></div></a>
+        <div id="search_list">
+            <ul>
+                <li><a href="#">剧集</a></li>
+                <li><a href="#">电影</a></li>
+                <li><a href="#">综艺</a></li>
+                <li><a href="#">来疯</a></li>
+                <li id="search_list_doHover"><img id="img0" src="image/块列表白.svg">
+                    <ul id="search_list_hover">
+                        <li>
+                            <div>
+                            <dl>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span ><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span ><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span ><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span ><a href="#">生活</a></span>
+                                </dd>
+                            </dl>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="search">
+            <input value="飞虎">
+            <button><label class="f13 f雅黑">搜库</label></button>
+        </div>
+        <div id="search_icon">
+            <div id="inSearch_icon">
+                <a href="#"><div id="icon_vip" class="f12 fw a78a15"><span id="pic_vip"></span><span class="icon_span icon_span_1">VIP</span></div></a>
+                <a href="personal_index.html"><div id="icon_sub" class="f12 f949497 icon_span2"><img id="img1" src="image/信号1.svg"><span class="icon_span">订阅</span></div></a>
+                <a href="history.html"><div id="icon_record" class="f12 f949497 icon_span2"><img id="img2" src="image/时钟.svg"><span class="icon_span">记录</span></div></a>
+                <a href="personal_index.html"><div id="icon_upload" class="f12 f949497 icon_span2"><img id="img3" src="image/向上-排序.svg" style="transform: rotate(180deg);"><span class="icon_span">上传</span></div></a>
+                <a href="yk_dynamic2.html"><div id="icon_app" class="f12 f949497 icon_span2"><img id="img4" src="image/电脑%20pc%20显示器.svg"><span class="icon_span">动态</span></div></a>
+                <a href="PersonInf.html"><div id="icon_avatar"><img id="facePic" src="" style="width: 40px;height: 40px;border-radius:100%;"></div></a>
+            </div>
+        </div>
+    </div>
+    <div id="top_movie">
+        <div id="movie">
+            <div id="inMovie">
+                <div class="video-x">
+                    <canvas id="canvasBarrage" class="canvas-barrage"></canvas>
+                <video id="video" width="866" height="488" controls="controls" controlsList="nodownload">
+<!--                    <source src="video/23.mp4" type="video/mp4" />-->
+<!--                    <object data="video/23.mp4" width="320" height="240">-->
+<!--                    <source src="video/23.ogv" tvype="video/ogg" />-->
+<!--                    <source src="video/23.webm" type="video/webm" />-->
+                        <embed src="movie.swf" width="320" height="240" />
+                    </object>
+                </video>
+                </div>
+                <div id="allSpeed">
+                <div id="chooseSpeed" class="tag f12">播放速度</div>
+                <div id="inChooseSpeed">
+                    <a style="padding-left: 4px">0.5</a>
+                    <a style="padding-left: 6px">1</a>
+                    <a>3</a>
+                </div>
+                </div>
+            </div>
+            <div id="inMovieBottom">
+                <div id="MovieBottomLeft">
+                    <ul>
+                        <a href="#"><li><div style="background-repeat: no-repeat;background-position:-290px 0px"></div>分享</li></a>
+                        <a style="cursor: pointer" href="video/movie.ogv" download="movie.ogv"><li class="MovieBottomLeft0"><div style="background-repeat: no-repeat;background-position:-230px 0px"></div><i></i>下载</li></a>
+                        <a style="cursor: pointer"><li class="MovieBottomLeft0"><div style="background-repeat: no-repeat;background-position:-350px 0px"></div><i></i>收藏</li></a>
+                        <a href="#"><li class="MovieBottomLeft0" style="width: 58px"><div style="background-repeat: no-repeat;background-position:-50px -20px"></div><i></i>手机看</li></a>
+                        <a href="#"><li class="MovieBottomLeft0"><div style="background-repeat: no-repeat;background-position:-150px 0px"></div><i></i>举报</li></a>
+                    </ul>
+                </div>
+                <div id="MovieBottomRight">
+                    <form id="barrageForm" action="/insertBarrage" method="post" autocomplete="off">
+                    <input class="ui-input" id="input" name="value" required>
+                    <input id="submit1" type="submit" value="发送" disabled>
+                    <div id="barrageOn"></div>
+                    <div id="barrageSetting"></div>
+                    <div id="inBarrageSetting">
+                        <input name="userId" value="1" style="display: none">
+                        <input name="time" value="1.222" style="display: none">
+                        <p>&nbsp;透明度(0-100)：<input id="range1" type="range" class="range" name="opacity" value="100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文字大小(16-32)：<input id="range2" type="range" class="range" name="fontSize" value="24"></p>
+                        <p>&nbsp;弹幕位置：<input type="radio" id="rangeFull" name="range" checked value="0,1"><label class="ui-radio" for="rangeFull"></label><label for="rangeFull">全部位置</label>
+                            <input type="radio" id="rangeTop" name="range" value="0,0.3"><label class="ui-radio" for="rangeTop"></label><label for="rangeTop">顶部</label>
+                            <input type="radio" id="rangeBottom" name="range" value="0.7,1"><label class="ui-radio" for="rangeBottom"></label><label for="rangeBottom">底部</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;颜色：<input type="color" id="color" name="color" value="#ff0000"></p>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="movieRight">
+            <div id="movieName">
+                <a class="fw">你是我的答案</a><br>
+                <a class="f12 a5a5a5" style="line-height: 40px">2019年9月9日起，会员每周一至周三24点同步卫视更...</a>
+            </div>
+            <div id="vipOpening">
+                <a href="#"><div id="inVipOpening" class="f5b3301 f14">开通VIP会员</div></a>
+                <div id="inVipOpeningText" class="fPingFangSC f12 f999999">开通VIP会员看大片</div>
+            </div>
+<!--            <div id="moviePage">-->
+<!--                <a href="#">1</a>-->
+<!--                <a class="moviePageNum" href="#">2</a>-->
+<!--                <a class="moviePageNum" href="#">3</a>-->
+<!--                <a class="moviePageNum" href="#">4</a>-->
+<!--                <a class="moviePageNum" href="#">5</a>-->
+<!--                <a href="#">6</a>-->
+<!--            </div>-->
+            <div id="relatedMovieTitle"><span class="a5a5a5 f14 fw">节目相关片段</span></div>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">一个成熟的男人。</div>
+                <div class="relatedText2 a5a5a5 f12">热度 4396</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/relatedPic2.webp"></div>
+                <div class="relatedText1 a5a5a5 f14">充满了丰收的喜悦！</div>
+                <div class="relatedText2 a5a5a5 f12">热度 6324</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h25.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">爱情的8000</div>
+                <div class="relatedText2 a5a5a5 f12">热度 8000</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h26.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">犹豫就是白给</div>
+                <div class="relatedText2 a5a5a5 f12">热度 8848</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h27.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">你怎么穿着品如的衣服</div>
+                <div class="relatedText2 a5a5a5 f12">热度 5779</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h24.gif"></div>
+                <div class="relatedText1 a5a5a5 f14">摇就完事了</div>
+                <div class="relatedText2 a5a5a5 f12">热度 4955</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h23.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">重返17岁</div>
+                <div class="relatedText2 a5a5a5 f12">热度 1234</div>
+            </div></a>
+            <a href="#"><div class="relatedMovie">
+                <div class="relatedPic"><img style="width: 116px" src="image/h22.jpg"></div>
+                <div class="relatedText1 a5a5a5 f14">谈笑间，樯橹灰飞烟灭</div>
+                <div class="relatedText2 a5a5a5 f12">热度 3124</div>
+            </div></a>
+        </div>
+    </div>
+    <div id="top_abstract">
+        <div id="ab_title">
+            <a class="ab_title_hover" href="#">陆战之王</a>
+            <div id="title_desc">
+                <a href="personal_index.html" class="f12" style="color: rgba(255,255,255,0.6);margin-left: 0px;width: 115.11px;display: block;float: left"><img src="image/头像demo.png"><span class="ab_title_hover" style="margin-left: 30px">飞虎之雷霆极战</span></a>
+                <span id="idol" style="display: none"></span>
+                <a style="cursor: pointer"><span class="f252506 f12 tag ab_title_hover" style="background-color: #505056;width: 60px;">关注</span></a>
+            </div>
+        </div>
+        <a href="#"><div id="ab_ad">
+            <div id="ab_ad_right" class="f12">广告</div>
+        </div></a>
+    </div>
+</div>
+<div id="content">
+    <div id="content_comment">
+        <div id="comment_editor1" class="toolbar"></div>
+        <div id="comment_editor2" class="text"></div>
+        <div id="comment_doSubmit" class="tag">发表评论</div>
+        <div id="comment_title">
+            <ul>
+                <li id="allComments" class="fw">全部评论<span class="f12 f909090 fw200">（999）</span></li>
+                <li id="allComments_myComment"></li>
+                <li id="myComment"><a href="#" class="f14 black">我的评论消息</a></li>
+            </ul>
+        </div>
+        <div id="comment_topPage">
+            <div class="comment_Page_left">第<span class="currentPage">1</span>页/共<span class="maxPage">4</span>页</div>
+            <div class="comment_Page_right">
+                <div class="nextPage pageJump f2692ff">下一页</div>
+                <div class="lastPage pageJump c6c6c6">上一页</div>
+                <div class="allPageSpan">
+                <div class="pageSpan f2692ff">4</div>
+                <div class="pageSpan f2692ff">3</div>
+                <div class="pageSpan f2692ff">2</div>
+                <div class="pageSpan" >1</div>
+                </div>
+            </div>
+        </div>
+        <div id="comments">
+            <div class="comment">
+                <img style="width: 50px;height: 50px;border-radius: 100%" src="image/头像demo.png">
+                <div class="comment_right">
+                    <div class="comment_user_info"><a href="#" class="f14 f2692ff">GodLike</a><a href="#"><img src="image/VIP.svg" style="width: 20px;margin-left: 5px"></a><span class="f12 bbbbbb">1分钟前</span></div>
+                    <div class="comment_content f14">我觉得不行！</div>
+                    <div class="like_dis">
+                        <img class="img5" src="image/赞_灰色.svg" style="width: 21px"><span class="bbbbbb">1</span>
+                        <img class="img6" src="image/赞_灰色.svg" style="width: 21px;margin-left: 10px;transform: rotate(180deg);"><span class="bbbbbb">1</span>
+                        <img class="img7" src="image/说话气泡.svg" style="width: 21px;margin-left: 10px"><span class="bbbbbb">(1)</span>
+                    </div>
+                </div>
+            </div>
+            <div id="includeComments">
+                <div id="inComments">
+                    <div id="comment_editor3" class="toolbar"></div>
+                    <div id="comment_editor4" class="text"></div>
+                    <div id="inCommentSubmit" class="tag f12">发表评论</div>
+                    <div id="blank"></div>
+                    <div class="inComment">
+                        <img src="image/头像demo.png" style="width: 32px;height: 32px;border-radius: 100%;margin-left: 15px;padding-top: 10px"><span class="f14 ff3300" style="margin-left: 5px;position: relative;top:-5px">我</span><span class="f14" style="margin-left: 5px;position: relative;top:-5px">你好</span><br><span style="margin-left: 18px;margin-top: 5px">刚刚</span>
+                    </div>
+                </div>
+            </div>
+            <div class="comment">
+                <img style="width: 50px;height: 50px;border-radius: 100%" src="image/头像demo.png">
+                <div class="comment_right">
+                    <div class="comment_user_info"><a href="#" class="f14 f2692ff">GodLike</a><a href="#"><img src="image/VIP.svg" style="width: 20px;margin-left: 5px"></a><span class="f12 bbbbbb">1分钟前</span></div>
+                    <div class="comment_content f14">我觉得不行！</div>
+                    <div class="like_dis">
+                        <img class="img5" src="image/赞_灰色.svg" style="width: 21px"><span class="bbbbbb">1</span>
+                        <img class="img6" src="image/赞_灰色.svg" style="width: 21px;margin-left: 10px;transform: rotate(180deg);"><span class="bbbbbb">1</span>
+                        <img class="img7" src="image/说话气泡.svg" style="width: 21px;margin-left: 10px"><span class="bbbbbb">(1)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="comment_bottomPage">分页</div>
+        <div id="comment_submit"><a href="#" class="f14 f2692ff">发表评论</a></div>
+    </div>
+    <div id="content_like">
+        <div id="content_like_title" class="f26 fimp f333">相关精彩视频</div>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/relatedPic1.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">一个成熟的男人。</div>
+            <div class="relatedText2 a5a5a5 f12">热度 4396</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/relatedPic2.webp"></div>
+            <div class="relatedText1 a5a5a5 f14">充满了丰收的喜悦！</div>
+            <div class="relatedText2 a5a5a5 f12">热度 6324</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h25.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">爱情的8000</div>
+            <div class="relatedText2 a5a5a5 f12">热度 8000</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h26.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">犹豫就是白给</div>
+            <div class="relatedText2 a5a5a5 f12">热度 8848</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h27.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">你怎么穿着品如的衣服</div>
+            <div class="relatedText2 a5a5a5 f12">热度 5779</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h24.gif"></div>
+            <div class="relatedText1 a5a5a5 f14">摇就完事了</div>
+            <div class="relatedText2 a5a5a5 f12">热度 4955</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h23.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">重返17岁</div>
+            <div class="relatedText2 a5a5a5 f12">热度 1234</div>
+        </div></a>
+        <a href="#"><div class="relatedMovie">
+            <div class="relatedPic"><img style="width: 116px" src="image/h22.jpg"></div>
+            <div class="relatedText1 a5a5a5 f14">谈笑间，樯橹灰飞烟灭</div>
+            <div class="relatedText2 a5a5a5 f12">热度 3124</div>
+        </div></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/顶端搜索框.css">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#search input").click(function () {
+                $("#search input").val("");
+            })
+            $("#search_list_doHover").hover(function () {
+                document.getElementById("img0").src="image/块列表蓝.svg";
+            })
+            $("#search_list_doHover").mouseleave(function () {
+                document.getElementById("img0").src="image/块列表白.svg";
+            })
+            $("#icon_sub").hover(function () {
+                document.getElementById("img1").src="image/信号1_hover.svg";
+            })
+            $("#icon_sub").mouseleave(function () {
+                document.getElementById("img1").src="image/信号1.svg";
+            })
+            $("#icon_record").hover(function () {
+                document.getElementById("img2").src="image/时钟_hover.svg";
+            })
+            $("#icon_record").mouseleave(function () {
+                document.getElementById("img2").src="image/时钟.svg";
+            })
+            $("#icon_upload").hover(function () {
+                document.getElementById("img3").src="image/向上-排序_hover.svg";
+            })
+            $("#icon_upload").mouseleave(function () {
+                document.getElementById("img3").src="image/向上-排序.svg";
+            })
+            $("#icon_app").hover(function () {
+                document.getElementById("img4").src="image/电脑%20pc%20显示器_hover.svg";
+            })
+            $("#icon_app").mouseleave(function () {
+                document.getElementById("img4").src="image/电脑%20pc%20显示器.svg";
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="top_search">
+    <div id="search_youKu"><a href="#"><img src="image/youku图标主要.svg"></a></div>
+    <div id="search_list">
+        <ul>
+            <li><a href="#">剧集</a></li>
+            <li><a href="#">电影</a></li>
+            <li><a href="#">综艺</a></li>
+            <li><a href="#">来疯</a></li>
+            <li id="search_list_doHover"><img id="img0" src="image/块列表白.svg">
+                <ul id="search_list_hover">
+                    <li>
+                        <div>
+                            <dl>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span ><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span ><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span ><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span ><a href="#">生活</a></span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="search">
+        <input value="飞虎">
+        <button><label class="f13 f雅黑">搜库</label></button>
+    </div>
+    <div id="search_icon">
+        <div id="inSearch_icon">
+            <a href="#"><div id="icon_vip" class="f12 fw a78a15"><span id="pic_vip"></span><span class="icon_span icon_span_1">VIP</span></div></a>
+            <a href="#"><div id="icon_sub" class="f12 f949497 icon_span2"><img id="img1" src="image/信号1.svg"><span class="icon_span">订阅</span></div></a>
+            <a href="#"><div id="icon_record" class="f12 f949497 icon_span2"><img id="img2" src="image/时钟.svg"><span class="icon_span">记录</span></div></a>
+            <a href="#"><div id="icon_upload" class="f12 f949497 icon_span2"><img id="img3" src="image/向上-排序.svg" style="transform: rotate(180deg);"><span class="icon_span">上传</span></div></a>
+            <a href="#"><div id="icon_app" class="f12 f949497 icon_span2"><img id="img4" src="image/电脑%20pc%20显示器.svg"><span class="icon_span">客户端</span></div></a>
+            <a href="#"><div id="icon_avatar"><img src="image/头像demo.png" style="width: 40px;height: 40px;border-radius:100%;"></div></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

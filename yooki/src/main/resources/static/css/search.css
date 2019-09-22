@@ -1,0 +1,50 @@
+.f雅黑{font-family: 微软雅黑}
+.f13{font-size: 13px}
+.f12{font-size: 12px}
+.fw{font-weight: bold}
+.a78a15{color: #a78a15}
+.f949497{color:#949497}
+body {
+    padding:0;  /*去除内边距*/
+    border:0;   /*去除边框*/
+    margin:0;   /*去除外边距*/
+}
+ul,li,dl{ margin:0px;padding:0px;text-align: center;list-style: none;}
+input,button{border:0px;margin:0px;padding:0px; display: flex;align-items: center;}
+button{cursor: pointer}
+a{text-decoration: none;color: white}
+#top{width: 1519.2px;height: 743px;background-color: #27272F;}
+#top_search{width: 1202px;height: 70px;margin: auto;}
+#top_search a:hover{color: #35b5ff}
+#icon_vip:hover{color: #ffce07}
+.icon_span2:hover{color: #35b5ff;}
+#search_youKu{width:120px;height: 70px;float: left;}
+#search_youKu img{margin-top:23px}
+#search_list{width:250px;height: 70px;float: left;margin-left:30px;color: white}
+#search_list ul{margin: 0 auto;}
+#search_list ul li{width:50px;float: left;line-height: 70px;}
+#search_list ul li img{margin-top: 19px}
+#search_list_hover{display: none}
+#search_list_doHover:hover #search_list_hover{display: inline-block}
+#search_list_hover div{position:absolute;left:158.6px;top:70px;width: 800px;height:90px;background-color: white;opacity:0.98}
+#search_list_hover dl{width: 760px;height:48px;margin-left: 93px}
+#search_list_hover dd{float: left;line-height:24px;margin-left: 10px;margin-top:20px;display: inline-block;width: 134px;height: 48px;border-right: 2px solid #f3f3f3;}
+.search_list_hover_span1{position:relative;left: -12px;top: -5px}
+.search_list_hover_span2{position:relative;left: -6px;top: -5px}
+.search_list_hover_span3{position:relative;;top: -5px;top:-5px}
+.search_list_hover_span4{position:relative;left: -12px;}
+.search_list_hover_span5{position:relative;left: -6px;}
+#search_list_hover a{color: #666666}
+#search{width:370px;height: 70px;float: left;margin-left:25px;color: white;}
+#search input{width: 290px;height: 38px;margin-top: 16px;padding-left:20px;background-color: #636367;border-top-left-radius: 19px;border-bottom-left-radius: 19px;color: white}
+#search button{width: 80px;height: 38px;float: right;margin-top: -38px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;background: linear-gradient(to right, #00c6ff, #0072ff);color: white;}
+#search button label{width: 80px;text-align: center;cursor: pointer}
+#search_icon{width:310px;height: 70px;float: right;}
+#inSearch_icon{width: 310px;height: 40px;margin-top: 15px;margin-left: -9px}
+#inSearch_icon div{width: 40px;height: 40px;text-align: center;float: left;margin-left: 9px}
+#inSearch_icon img{width: 20px;height: 20px;margin-left: 6px}
+.icon_span{position: relative;display: inline-block;width: 24px;left: 4px;float: bottom;}
+#pic_vip{width: 28px;height: 22px;margin-left:6px;background-image: url("../image/会员图标所在矢量合集-300-1200.png");background-size:300px;background-repeat: no-repeat;background-position: -32px -163px;float: left}
+.icon_span_1{margin-left: -8px;margin-top: 1px}
+#icon_avatar{padding-left: 16px}
+#icon_app span{width: 36px}

@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    username: test
+    password: 123456
+    url: jdbc:mysql://47.100.79.240:3306/ykdb?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+    driver-class-name: com.mysql.jdbc.Driver
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.uploadPath}
+
+mybatis:
+  mapper-locations: classpath:org/lanqiao/yk/mapper/*.xml
+#  type-aliases-package: org.lanqiao.entity
+
+#showSql
+logging:
+  level:
+    com.lanqiao.jd.mapper: DEBUG
+#路径为硬盘路径，如果是centos服务器则改为相应路径
+web:
+  uploadPath: /home

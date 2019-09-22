@@ -1,0 +1,180 @@
+.f雅黑{font-family: 微软雅黑}
+.fPingFangSC{font-family: PingFangSC-Regular}
+.f13{font-size: 13px}
+.f12{font-size: 12px}
+.f14{font-size: 14px}
+.f16{font-size: 16px}
+.f26{font-size: 26px}
+.fw{font-weight: bold}
+.fw200{font-weight: 200}
+.fimp{font-weight: 200 !important;}
+.f2692ff{color: #2692ff}
+.f2692ff{color: #2692ff}
+.f252506{color: rgba(255,255,255,0.6)}
+.a78a15{color: #a78a15}
+.f909090{color:#909090}
+.f949497{color:#949497}
+.f999999{color:#999999}
+.a5a5a5{color: #a5a5a5}
+.f555555{color: #555555}
+.f5b3301{color: #5b3301}
+.bbbbbb{color: #bbbbbb}
+.ff3300{color: #ff3300}
+.cccccc{color: #cccccc}
+.c6c6c6{color: #c6c6c6}
+.f333{color: #333}
+.black{color: black}
+body {
+    padding:0;  /*去除内边距*/
+    border:0;   /*去除边框*/
+    margin:0;   /*去除外边距*/
+}
+p{margin: 0}
+ul,li,dl{ margin:0px;padding:0px;list-style: none;}
+button{border:0px;margin:0px;padding:0px; display: flex;align-items: center;outline:none;}
+video{outline:none;}
+button{cursor: pointer}
+a{text-decoration: none;color: white}
+img:hover{cursor: pointer}
+.tag{border-radius:15px;margin-left:10px;margin-top:10px;height: 22px;line-height:22px;text-align:center;display: block;float: left;cursor: pointer}
+#top{width: 1519.2px;height: 743px;background-color: #27272F}
+#top_search{width: 1202px;height: 70px;margin: auto;}
+#top_search a:hover{color: #35b5ff}
+#icon_vip:hover{color: #ffce07}
+.icon_span2:hover{color: #35b5ff;}
+#search_youKu{width:120px;height: 70px;float: left;}
+#search_youKu img{margin-top:23px}
+#search_list{width:250px;height: 70px;float: left;margin-left:30px;color: white}
+#search_list ul{margin: 0 auto;}
+#search_list ul li{width:50px;float: left;line-height: 70px;}
+#search_list ul li img{margin-top: 19px}
+#search_list_hover{display: none;z-index: 9999999;position: absolute;left:0px}
+#search_list_doHover:hover #search_list_hover{display: inline-block}
+#search_list_hover div{position:absolute;left:158.6px;top:60px;width: 800px;height:90px;background-color: white;opacity:0.98;border:#074A99 0px solid;-webkit-box-shadow: 0 0 20px #074A99;/*safari或chrome*/}
+#search_list_hover dl{width: 760px;height:48px;margin-left: 93px;text-align: center;}
+#search_list_hover dd{float: left;line-height:24px;margin-left: 10px;margin-top:20px;display: inline-block;width: 134px;height: 48px;border-right: 2px solid #f3f3f3;}
+.search_list_hover_span1{position:relative;left: -12px;top: -5px}
+.search_list_hover_span2{position:relative;left: -6px;top: -5px}
+.search_list_hover_span3{position:relative;;top: -5px;top:-5px}
+.search_list_hover_span4{position:relative;left: -12px;}
+.search_list_hover_span5{position:relative;left: -6px;}
+#search_list_hover a{color: #666666}
+#search{width:370px;height: 70px;float: left;margin-left:25px;color: white;}
+#search input{border:0px;margin:0px;padding:0px; display: flex;align-items: center;outline:none;width: 290px;height: 38px;margin-top: 16px;padding-left:20px;background-color: #636367;border-top-left-radius: 19px;border-bottom-left-radius: 19px;color: white;}
+#search button{width: 80px;height: 38px;float: right;margin-top: -38px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;background: linear-gradient(to right, #00c6ff, #0072ff);color: white;}
+#search button label{width: 80px;text-align: center;cursor: pointer}
+#search_icon{width:310px;height: 70px;float: right;}
+#inSearch_icon{width: 310px;height: 40px;margin-top: 15px;margin-left: -9px}
+#inSearch_icon div{width: 40px;height: 40px;text-align: center;float: left;margin-left: 9px}
+#inSearch_icon img{width: 20px;height: 20px;margin-left: 6px}
+.icon_span{position: relative;display: inline-block;width: 24px;left: 4px;float: bottom;}
+#pic_vip{width: 28px;height: 22px;margin-left:6px;background-image: url("../image/会员图标所在矢量合集-300-1200.png");background-size:300px;background-repeat: no-repeat;background-position: -32px -163px;float: left}
+.icon_span_1{margin-left: -8px;margin-top: 1px}
+#icon_avatar{padding-left: 16px}
+#icon_app span{width: 36px}
+#top_movie{width: 1202px;height: 548px;margin: auto;background-color: #1F1F1F}
+#movie{width: 866px;height: 548px;float:left;}
+#inMovie{width: 866px;height: 488px;float:left;}
+#chooseSpeed{display:none;position: absolute;left: 730px;top: 483px;color: white;background-color: initial;height: 36px;width: 60px;line-height: 36px;cursor: pointer}
+#inChooseSpeed{position: absolute;left: 730px;top: 457px;cursor: pointer;background-color: rgba(0,0,0,0.5);height: 36px;width: 80px;border-radius: 5px;text-align: center;line-height: 36px;display: none}
+#inChooseSpeed a{display: inline-block;width: 20px;color: white}
+#inMovieBottom{width: 866px;height: 60px;float:left;}
+#MovieBottomLeft{width: 346px;height: 40px;float: left;margin-left: 22px;margin-top: 10px}
+#MovieBottomLeft li{float: left;line-height: 40px;font-size: 12px;color: #666666;width: 48px;text-align: right}
+.MovieBottomLeft0{margin-left: 17px}
+#MovieBottomLeft li:hover{color: #35b5ff}
+#MovieBottomLeft div{position:absolute;margin-top:13px;width: 14px;height: 14px;background-image: url("../image/视频播放矢量合集.png");}
+#MovieBottomRight{width: 498px;height: 40px;float: left;margin-top: 10px}
+#input{border:0px;margin:0px;padding:0px; display: flex;align-items: center;outline:none;width: 355px;height: 32px;padding-left:20px;background-color: #333333;border-top-left-radius: 19px;border-bottom-left-radius: 19px;color: white;outline:none;float: left;font-size: 12px;margin-top: 4px}
+#submit1{border:0px;margin:0px;padding:0px; display: flex;align-items: center;outline:none;float: left;text-align: left;padding-left: 10px;
+    position:relative;left:-40px;width: 60px;height: 32px;margin-top: 4px;border-top-right-radius: 19px;border-bottom-right-radius: 19px;background-color: #505056;color: #999999;font-size: 14px;letter-spacing: 5px}
+#barrageSetting{width: 32px;height: 26px;float: right;margin-top: -23px;margin-right: 55px;background-image: url("../image/视频播放矢量合集.png");background-repeat: no-repeat;background-position:-170px -20px;cursor: pointer}
+#inBarrageSetting{line-height:40px;width:600px;height: 90px;position: absolute;background-color: #e5e5e5;border-radius: 5px;right:474px;top:480px;display: none}
+#chooseColor{display: inline}
+#barrageOn{width: 36px;height: 22px;float: right;margin-top: 10px;margin-right: 10px;background-image: url("../image/视频播放矢量合集.png");background-repeat: no-repeat;background-position:-130px -20px}
+#movieRight{width: 336px;height: 548px;float:left;overflow: hidden;overflow-y: scroll;}
+#movieRight::-webkit-scrollbar {width: 0;}
+#movieName{width: 296px;height: 50px;margin: 13px auto;color: white}
+#vipOpening{width: 296px;height: 68px;margin: auto;text-align: center}
+#inVipOpening{width: 296px;height: 30px;background: linear-gradient(to right, #FCE5AA, #E1B271);border-radius: 15px;line-height: 30px}
+#inVipOpeningText{width: 296px;height: 38px;line-height: 38px}
+#moviePage{width: 296px;height: 108px;margin: auto}
+#moviePage a{width: 36px;height: 36px;text-align: center;line-height: 36px;display: block;float: left;margin-top: 10px;color: #cccccc;font-size: 16px;font-weight: bold}
+#moviePage a:hover{color: #35b5ff}
+.moviePageNum{margin-left: 26px}
+#relatedMovieTitle{width: 296px;height: 14px;margin:20px auto;line-height: 14px;border-left: 3px solid #007ffe}
+#relatedMovieTitle span{display: block;margin-left: 10px;padding-top: -5px}
+.relatedMovie{width: 296px;height: 65px;margin: 10px auto}
+.relatedPic{width: 116px;height: 65px;float: left}
+.relatedText1{width: 170px;height: 20px;float: right}
+.relatedText1:hover{color: #35b5ff}
+.relatedText2{width: 170px;height: 20px;float: right;margin-top: 3px}
+#top_abstract{width: 1202px;height: 127px;margin: auto;}
+#ab_title{width: 690px;height: 69px;font-size: 24px;color: #FFFFFF;margin-top: 29px;font-weight: 200 !important;float: left}
+#title_desc{width: 690px;height: 28px;margin-bottom: 0px;line-height: 40px}
+.ab_title_hover:hover{color: #35b5ff}
+#title_desc img{width: 20px;border-radius: 100%;position: absolute;margin-top: 10px}
+#ab_ad{width: 484px;height: 114px;background-color: #0072ff;float: right;margin-top: 5px;background-image: url("../image/广告雷霆机战.jpg");background-repeat: no-repeat;background-position: -260px}
+#ab_ad_right{float: right;background-color: rgb(65,69,78);color: #ffffff}
+#content{width: 1202px;height: 2000px;margin: 40px auto}
+#content_comment{width: 840px;height: 2000px;float: left;}
+.toolbar {
+    border: 1px solid #ccc;
+}
+.text {
+    border: 1px solid #ccc;
+}
+#comment_editor1{width: 840px;}
+#comment_editor2{width: 840px;height: 200px;}
+#comment_doSubmit{width: 80px;height: 25px;background-color: #2692FF;position: absolute;top: 777px;left: 883px;color:white}
+#comment_title{width: 840px;height: 49px;text-align: center;line-height: 49px;z-index: 999}
+#allComments{width: 130px;height: 49px;float: left;color: #2692FF;font-size: 16px;border-bottom: 1px solid #2692ff;cursor: pointer;}
+#allComments_myComment{width: 606px;height: 49px;border-bottom: 1px solid #e5e5e5;float: left}
+#myComment{width: 104px;height: 49px;float: right;border-bottom: 1px solid #e5e5e5}
+#comment_topPage{width: 840px;height: 24px;margin-top: 10px}
+.comment_Page_left{width: 200px;float: left;color: #909090;font-size: 12px}
+.comment_Page_right{width: 300px;float: right;font-size: 14px}
+.comment_Page_right div{float: right;cursor: pointer;user-select: none}
+.pageSpan{width: 14px;height: 24px;text-align: center;line-height: 24px}
+.pageJump{width: 52px;height: 22px;text-align: center;line-height: 22px;border: 1px solid #C6C6C6;margin-left: 3px}
+#comments{width: 840px;height: 1500px;}
+.comment{width: 840px;height: 88px;border-bottom: 1px solid #e5e5e5;margin-top: 10px;float: left}
+.comment_right{width: 780px;height: 77px;float: right;}
+.comment_user_info span{margin-left: 20px}
+.comment_user_info a:hover{color: #ff1500}
+.comment_content{margin-top: 5px}
+.like_dis{margin-top: 10px;}
+.like_dis span{margin-left: 3px;}
+#comment_bottomPage{width: 840px;height: 24px;}
+#comment_submit{width: 840px;height: 28px;text-align: center;line-height: 28px;background-color: #f0f0f0}
+#comment_submit:hover{background-color: #e5e5e5;}
+#comment_submit a:hover{color: #ff1500}
+#content_like{width: 316px;height: 2000px;float: right;}
+#content_like_title{width: 316px;height: 26px;}
+#content_like div{margin-left: 0px}
+#includeComments{width: 820px;height: 262px;float: right;background-color: #FAFAFA;overflow: hidden;overflow-y: scroll;box-shadow: 10px 10px 5px #888888;display: none}
+#includeComments::-webkit-scrollbar {width: 0px;}
+#inComments{width: 795px;height: 208px;float: right;margin-right: 10px;margin-top: 10px}
+#comment_editor3{width: 795px;height: 30px}
+#comment_editor4{width: 795px;height: 100px}
+#inCommentSubmit{width: 60px;height: 20px;background-color: #00c6ff;position: relative;top: -136px;left: 700px;color:white;float: none}
+#blank{width: 765px;height: 20px}
+.inComment{width: 820px;height: 73px;background-color:#FAFAFA;border-bottom: #e5e5e5 1px solid;margin-left: -15px;font-size: 12px;}
+.inComment span{display: inline-block}
+#top_abstract1{width: 1400px;height: 1400px;margin: auto;background-image: url("../image/视频播放矢量合集.png");background-repeat: no-repeat;background-position:-90px -20px}
+.video-x {
+    position: relative;
+    width: 866px;
+    margin: auto;
+}
+.video-x video {
+    background-color: black;
+    /*outline: 1px solid #eee;*/
+}
+.canvas-barrage {
+    position: absolute;
+    width: 866px;
+    height: 488px;
+    pointer-events: none;
+    z-index: 1;
+}

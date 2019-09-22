@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link href="css/homepage.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/layui/css/layui.css"  media="all">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/layui/layui.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(function () {
+            //改变图片颜色
+            $("#pic2").hover(function() {
+                document.getElementById("pic2_1").src="image/信号1_hover.svg";
+            })
+            $("#pic2").mouseleave(function() {
+                document.getElementById("pic2_1").src="image/信号1.svg";
+            })
+            $("#pic3").hover(function() {
+                document.getElementById("pic3_1").src="image/clock_hover.svg";
+            })
+            $("#pic3").mouseleave(function() {
+                document.getElementById("pic3_1").src="image/clock.svg";
+            })
+            $("#pic4").hover(function() {
+                document.getElementById("pic4_1").src="image/down_hover.svg";
+            })
+            $("#pic4").mouseleave(function() {
+                document.getElementById("pic4_1").src="image/down.svg";
+            })
+            $("#pic5").hover(function() {
+                document.getElementById("pic5_1").src="image/com_hover.svg";
+            })
+            $("#pic5").mouseleave(function() {
+                document.getElementById("pic5_1").src="image/com.svg";
+            })
+
+            //轻触放大
+            $("#num1").hover(function(){
+                $("#num1").css("height","40px");
+                $("#num1").css("font-size","24px");
+                $("#num1").css("line-height","40px");
+            })
+            $("#num1").mouseleave(function(){
+                $("#num1").css("height","20px");
+                $("#num1").css("font-size","14px");
+                $("#num1").css("line-height","20px");
+            })
+            $("#num2").hover(function(){
+                $("#num2").css("height","40px");
+                $("#num2").css("font-size","24px");
+                $("#num2").css("line-height","40px");
+            })
+            $("#num2").mouseleave(function(){
+                $("#num2").css("height","20px");
+                $("#num2").css("font-size","14px");
+                $("#num2").css("line-height","20px");
+            })
+            $("#num3").hover(function(){
+                $("#num3").css("height","40px");
+                $("#num3").css("font-size","24px");
+                $("#num3").css("line-height","40px");
+            })
+            $("#num3").mouseleave(function(){
+                $("#num3").css("height","20px");
+                $("#num3").css("font-size","14px");
+                $("#num3").css("line-height","20px");
+            })
+            $("#num4").hover(function(){
+                $("#num4").css("height","40px");
+                $("#num4").css("font-size","24px");
+                $("#num4").css("line-height","40px");
+            })
+            $("#num4").mouseleave(function(){
+                $("#num4").css("height","20px");
+                $("#num4").css("font-size","14px");
+                $("#num4").css("line-height","20px");
+            })
+            $("#num5").hover(function(){
+                $("#num5").css("height","40px");
+                $("#num5").css("font-size","24px");
+                $("#num5").css("line-height","40px");
+            })
+            $("#num5").mouseleave(function(){
+                $("#num5").css("height","20px");
+                $("#num5").css("font-size","14px");
+                $("#num5").css("line-height","20px");
+            })
+            $("#num6").hover(function(){
+                $("#num6").css("height","40px");
+                $("#num6").css("font-size","24px");
+                $("#num6").css("line-height","40px");
+            })
+            $("#num6").mouseleave(function(){
+                $("#num6").css("height","20px");
+                $("#num6").css("font-size","14px");
+                $("#num6").css("line-height","20px");
+            })
+            $("#num7").hover(function(){
+                $("#num7").css("height","40px");
+                $("#num7").css("font-size","24px");
+                $("#num7").css("line-height","40px");
+            })
+            $("#num7").mouseleave(function(){
+                $("#num7").css("height","20px");
+                $("#num7").css("font-size","14px");
+                $("#num7").css("line-height","20px");
+            })
+
+
+
+            // $(".else1").hover(function () {
+            //     $("#top1").animate({bottom: "5px"}, 100);},
+            //     function () {
+            //     $("#top1").animate({top: "5px"}, 100);}
+            // );
+            // // $(".else1").mouseout(function () {
+            // //     $("#top1").animate({top: "5px"}, 100);
+            // // })
+        })
+    </script>
+
+</head>
+<body>
+<!--全屏-->
+<div id="full">
+<!-- 顶部  -->
+    <div id="top">
+    </div>
+    <div id="title">
+        <div id="top_title">
+            <div id="yk_title"><img src="image/youku图标主要.png" style="width: 120px"> </div>
+            <div id="search">
+                <input type="text" id="search_content">
+                <input type="button" id="submit" value="搜全网">
+            </div>
+            <div id="message">
+                <a href="#"><div class="message_content" id="pic1"><img src="image/vip1.png" id="pic1_1"><span id="vip" class="message_text">&nbsp;VIP</span>  </div></a>
+                <div class="message_content" id="pic2"><a href="personal_index.html"><img src="image/wifi.svg" id="pic2_1"><span class="message_text">订阅</span></a> </div>
+                <div class="message_content" id="pic3"><a href="history.html"><img src="image/clock.svg" id="pic3_1"><span class="message_text">记录</span></a> </div>
+                <div class="message_content" id="pic4"><a href="yk_dynamic2.html"><img src="image/down.svg" id="pic4_1"><span class="message_text">动态</span></a> </div>
+                <div class="message_content" id="pic5"><a href="yk_dynamic2.html"><img src="image/com.svg" id="pic5_1"><span class="message_text1">动态</span></a> </div>
+                <div class="message_content1"><a href="PersonInf.html"><img id="facPic" src="image/1.jpg"> </a></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="layui-carousel" id="test10">
+        <div carousel-item="">
+            <div><img src="image/title1.jpg"></div>
+            <div><img src="image/title2.jpg"></div>
+            <div><img src="image/title3.jpg"></div>
+            <div><img src="image/title4.jpg"></div>
+            <div><img src="image/title5.jpg"></div>
+            <div><img src="image/title6.jpg"></div>
+            <div><img src="image/title7.jpg"></div>
+        </div>
+    </div>
+<!-- 菜单  -->
+    <div id="menu">
+        <div id="menu_content">
+            <ul class="menu_type">
+                <li class="type1"><img src="image/h4.png"><a href="#" id="jump1"><b>剧集</b></a> </li><li class="type1"><img src="image/h5.png"><a href="#" id="jump2"><b>电影</b></a> </li><li class="type2"><img src="image/h6.png"><a href="#" id="jump3"><b>少儿</b></a> </li>
+                <li class="type3"><img src="image/h7.png"><a href="#" id="jump4"><b>综艺</b></a></li><li class="type3"><img src="image/h8.png"><a href="#" id="jump5"><b>动漫</b></a></li><li class="type4"><img src="image/h9.png"><a href="#"  id="jump6"><b>纪录片</b></a></li>
+            </ul>
+            <ul class="space"><li class="space_content"></li></ul>
+            <ul class="menu_info">
+                <li class="info1"><a href="#"><b>文化</b></a></li><li class="info1"><a href="#"><b>体育</b></a></li><li class="info1"><a href="#"><b>来疯</b></a></li>
+                <li class="info1"><a href="#"><b>时尚</b></a></li><li class="info1"><a href="#"><b>音乐</b></a></li><li class="info1"><a href="#"><b>旅游</b></a></li>
+                <li class="info1"><a href="#"><b>娱乐</b></a></li><li class="info1"><a href="#"><b>资讯</b></a></li><li class="info1"><a href="#"><b>公益</b></a></li>
+                <li class="info2"><a href="#"><b>财经</b></a></li>
+                <li class="info3"><a href="#"><b>教育</b></a></li><li class="info3"><a href="#"><b>游戏</b></a></li><li class="info3"><a href="#"><b>直播</b></a></li>
+                <li class="info3"><a href="#"><b>搞笑</b></a></li><li class="info3"><a href="#"><b>汽车</b></a></li><li class="info3"><a href="#"><b>亲子</b></a></li>
+                <li class="info3"><a href="#"><b>生活</b></a></li><li class="info3"><a href="#"><b>片库</b></a></li><li class="info3"><a href="#"><b>科技</b></a></li>
+                <li class="info4"><a href="#"><b>发现</b></a></li>
+            </ul>
+            <ul class="menu_else">
+                <a href="#"><li class="else1"><img src="image/h10.png" id="top1"><br>我们的70年 </li></a>
+                <a href="#"><li class="else2"><img src="image/h11.png" id="top2"><br>优酷片库 </li></a>
+                <a href="#"><li class="else3"><img src="image/h12.png" id="top3"><br>下载中心 </li></a>
+            </ul>
+
+        </div>
+
+    </div>
+<!-- 热播  -->
+    <div class="hot">
+        <div class="hot_content">
+            <div class="hot_title">
+                <ul class="hot1">
+                    <li><b>正在热播</b></li>
+                    <li class="hot1_1"><a href="#"><b>《四季中国》第十五集《白露》</b></a> </li>
+                    <li class="hot1_2"><a href="#"><b>"可爱的中国"之纳西族</b></a> </li>
+                </ul>
+
+            </div>
+            <div class="hot_message">
+                <ul class="hot2">
+                    <li><a href="#"> <img src="image/h13.jpg"></a></li>
+                    <li><a href="#"><img src="image/h14.jpg"></a></li>
+                    <li><a href="#"><img src="image/h15.jpg"></a></li>
+                    <li><a href="#"><img src="image/h16.jpg"></a></li>
+                    <li><a href="#"><img src="image/h17.jpg"></a></li>
+                    <li class="h18"><a href="#"><img src="image/h18.jpg"></a></li>
+                </ul>
+            </div>
+            <div class="hot_name">
+                <ul class="hot3">
+                    <li><a href="#"><b>型动派·要结婚啦？</b></a> </li>
+                    <li>实锤！沈梦辰公开回应婚期</li>
+                </ul>
+                <ul class="hot3">
+                    <li><a href="#"><b>一起乐队吧·喜感脖套哥</b></a> </li>
+                    <li>迷弟为看汪峰扭伤脖子</li>
+                </ul>
+                <ul class="hot3">
+                    <li><a href="#"><b>煎饼果子·武星北漂</b></a> </li>
+                    <li>院网同步动作喜剧来袭</li>
+                </ul>
+                <ul class="hot3">
+                    <li><a href="#"><b>猪猪侠·恐龙日记</b></a> </li>
+                    <li>猪猪侠带你回恐龙时代</li>
+                </ul>
+                <ul class="hot3">
+                    <li><a href="#"><b>九州·限时免费观看全集</b></a> </li>
+                    <li>阿苏勒激发狂血扭转局面</li>
+                </ul>
+                <ul class="hot4">
+                    <li><a href="#"><b>圆桌派4·心里阴影</b></a> </li>
+                    <li>你还在怪原生家庭？</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+<!-- 剧集   -->
+    <div class="drama">
+        <div class="drama_content">
+            <div class="drama_title">
+                <span><b>剧集</b></span>
+                <div class="title1"><a href="#"><b>最新</b></a> </div>
+                <div class="title1"><a href="#"><b>大陆剧</b></a> </div>
+                <div class="title1"><a href="#"><b>日韩剧</b></a> </div>
+                <div class="title1"><a href="#"><b>港台剧</b></a> </div>
+                <div class="title1"><a href="#"><b>英美剧</b></a> </div>
+            </div>
+            <div class="drama_message">
+                <ul class="drama1">
+                    <li><a href="#"><img src="image/h19.jpg"></a>  </li>
+                    <li class="drama1_1"><a href="#"><b>飞虎之雷霆极战</b></a> </li>
+                    <li class="drama1_2">黄宗泽吴卓羲马国明掀激战</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/h20.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>陆战之王</b></a> </li>
+                    <li class="drama2_2">陈晓王雷演绎硬核坦克兵</li>
+                    <li class="drama2_3"><a href="#"><img src="image/h24.gif"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>山月不知心底事</b></a> </li>
+                    <li class="drama2_2">宋茜欧豪演绎辗转情缘</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/h21.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>你是我的答案·定档</b></a> </li>
+                    <li class="drama2_2">吴谨言爆笑追爱郭晓东</li>
+                    <li class="drama2_3"><a href="#"><img src="image/h25.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>拜托啦师兄</b></a> </li>
+                    <li class="drama2_2">迷妹倒追昔日偶像</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/h22.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>伟大的转折</b></a> </li>
+                    <li class="drama2_2">四渡赤水展现红军英姿</li>
+                    <li class="drama2_3"><a href="#"><img src="image/h26.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>读心·洞察</b></a> </li>
+                    <li class="drama2_2">李小璐李佳航揭穿渣男</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/h23.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>你是我眼中的山川和海洋</b></a> </li>
+                    <li class="drama2_2">少年演绎苏爽校园初恋</li>
+                    <li class="drama2_3"><a href="#"><img src="image/h27.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>玲珑局</b></a> </li>
+                    <li class="drama2_2">余文乐颖儿乱世情深</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<!-- 电影  -->
+    <div class="film">
+        <div class="film_content">
+
+            <ul class="film_1">
+                <li><b>电影</b></li>
+                <li class="film_2"><a href="#"><b>热播</b></a> </li>
+                <li class="film_2"><a href="#"><b>免费</b></a> </li>
+                <li class="film_2"><a href="#"><b>好莱坞</b></a> </li>
+                <li class="film_2"><a href="#"><b>预告片</b></a> </li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/h28.jpg"> </li>
+                <li class="content1_1"><a href="#"><b>方世玉之千面修罗</b></a> </li>
+                <li class="content1_2">少侠热血保家</li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/h29.jpg"> </li>
+                <li class="content1_1"><a href="#"><b>上海堡垒</b></a> </li>
+                <li class="content1_2">鹿晗舒淇战外星人</li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/h30.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>扫毒2天地对决</b></a> </li>
+                <li class="content1_2">刘德华古天乐高燃对决！</li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/h31.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>复仇者联盟4</b></a> </li>
+                <li class="content1_2">终局之战最后集结</li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/h32.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>黑衣人：全球追缉</b></a> </li>
+                <li class="content1_2">锤哥搭档女武神激战外星人</li>
+            </ul>
+            <ul class="content_2">
+                <li><img src="image/h33.jpg"> </li>
+                <li class="content1_1"><a href="#"><b>跳舞吧！大象</b></a> </li>
+                <li class="content1_2">艾伦领衔开心麻花新组合爆笑来袭</li>
+            </ul>
+
+
+
+        </div>
+    </div>
+    <!-- 超级网剧  -->
+    <div class="hot">
+        <div class="hot_content">
+            <div class="hot_title">
+                <ul class="hot1">
+                    <li><b>超级网剧</b></li>
+                    <!--                    <li class="hot1_1"><a href="#"><b>《四季中国》第十五集《白露》</b></a> </li>-->
+                    <!--                    <li class="hot1_2"><a href="#"><b>"可爱的中国"之纳西族</b></a> </li>-->
+                </ul>
+
+            </div>
+            <div class="hot_message">
+                <ul class="hot2">
+                    <li><a href="#"><img src="image/super1.jpg"></a></li>
+                    <li><a href="#"><img src="image/super2.jpg"></a></li>
+                    <li><a href="#"><img src="image/super3.jpg"></a></li>
+                    <li><a href="#"><img src="image/super4.jpg"></a></li>
+                    <li><a href="#"><img src="image/super5.jpg"></a></li>
+                    <li class="h18"><a href="#"><img src="image/super6.jpg"></a></li>
+                </ul>
+            </div>
+
+            <div class="hot_name">
+                <ul class="hot3">
+                    <li><a href="#"><b>读心</b></a> </li>
+                    <li>李小璐李佳航上演读心夫妻</li>
+                </ul>
+                <ul class="hot3">
+                    <li><a href="#"><b>你是我眼中的山川和海洋</b></a> </li>
+                    <li>少年志趣相投回味青春校园初恋</li>
+                </ul>
+                <ul class="hot3">
+                    <li><a href="#"><b>拜托啦师兄</b></a> </li>
+                    <li>击剑天才跌谷底涅槃重生</li>
+                </ul>
+                <ul class="hot3">
+                    <li><a href="#"><b>我的邻居睡不着</b></a> </li>
+                    <li>污力少女冷面才子上演蜜糖初恋</li>
+                </ul>
+                <ul class="hot3">
+                    <li><a href="#"><b>玲珑局</b></a> </li>
+                    <li>余文乐颖儿乱世情深</li>
+                </ul>
+                <ul class="hot4">
+                    <li><a href="#"><b>春花秋月</b></a> </li>
+                    <li>鬼马少女邪魅公子玩味江湖</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- 体育   -->
+    <div class="drama">
+        <div class="drama_content">
+            <div class="drama_title">
+                <span><b>体育</b></span>
+                <div class="title1"><a href="#"><b>最新资讯</b></a> </div>
+                <div class="title1"><a href="#"><b>热门直播</b></a> </div>
+                <div class="title1"><a href="#"><b>搏击</b></a> </div>
+                <div class="title1"><a href="#"><b>健身</b></a> </div>
+                <div class="title1"><a href="#"><b>钓鱼</b></a> </div>
+                <div class="title1"><a href="#"><b>舞蹈</b></a> </div>
+            </div>
+            <div class="drama_message">
+                <ul class="drama1">
+                    <li><a href="#"><img src="image/sport1.png"></a>  </li>
+                    <li class="drama1_1"><a href="#"><b>美国大胜巴西晋级八强</b></a> </li>
+                    <li class="drama1_2">全胜！感受与NBA的差距</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/sport2.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>神迹LINSANITY</b></a> </li>
+                    <li class="drama2_2">《Memory》第十期</li>
+                    <li class="drama2_3"><a href="#"><img src="image/sport3.png"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>国足首发基本出炉</b></a> </li>
+                    <li class="drama2_2">武磊艾克森能进几个？</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/sport4.png"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>男篮世界杯八强落定！</b></a> </li>
+                    <li class="drama2_2">希腊惨遭淘汰美国首胜</li>
+                    <li class="drama2_3"><a href="#"><img src="image/sport5.jpeg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>赵睿穿美国外套登热搜</b></a> </li>
+                    <li class="drama2_2">被批无情商</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/sport6.jpeg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>崩了！灰熊拒买断一哥</b></a> </li>
+                    <li class="drama2_2">多支争冠队傻眼了</li>
+                    <li class="drama2_3"><a href="#"><img src="image/sport7.jpeg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>里皮：武艾无磨合问题</b></a> </li>
+                    <li class="drama2_2">不管对谁都要全取三分</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/sport8.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>WWE女子4骑士混战擂台</b></a> </li>
+                    <li class="drama2_2">夏洛特破坏贝莉飞射</li>
+                    <li class="drama2_3"><a href="#"><img src="image/sport9.jpeg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>韩乔生评周琦难成领袖</b></a> </li>
+                    <li class="drama2_2">《灌篮》要为郭艾伦背锅？</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 会员  -->
+    <div class="film">
+        <div class="film_content">
+
+            <ul class="film_1">
+                <li><b>会员</b></li>
+                <li class="film_2"><a href="#"><b>最新</b></a> </li>
+                <li class="film_2"><a href="#"><b>院线大片</b></a> </li>
+                <li class="film_2"><a href="#"><b>独播强档</b></a> </li>
+                <li class="film_2"><a href="#"><b>热门纪实</b></a> </li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/vip1.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>飞虎之雷霆极战</b></a> </li>
+                <li class="content1_2">飞虎出击霸气反恐</li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/vip2.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>陆战之王</b></a> </li>
+                <li class="content1_2">陈晓王雷争当兵王</li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/vip3.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>山月不知心底事</b></a> </li>
+                <li class="content1_2">宋茜欧豪成长蜕变</li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/vip4.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>读心</b></a> </li>
+                <li class="content1_2">李小璐搭档李佳航</li>
+            </ul>
+            <ul class="content_1">
+                <li><img src="image/vip5.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>中国好声音2019</b></a> </li>
+                <li class="content1_2">李荣浩呆萌助力</li>
+            </ul>
+            <ul class="content_2">
+                <li><img src="image/vip6.jpeg"> </li>
+                <li class="content1_1"><a href="#"><b>长安十二时辰</b></a> </li>
+                <li class="content1_2">佳玺合璧守护长安</li>
+            </ul>
+
+
+
+        </div>
+    </div>
+
+    <!-- 综艺   -->
+    <div class="drama">
+        <div class="drama_content">
+            <div class="drama_title">
+                <span><b>综艺</b></span>
+                <div class="title1"><a href="#"><b>最新综艺</b></a> </div>
+                <div class="title1"><a href="#"><b>综艺真人秀</b></a> </div>
+                <div class="title1"><a href="#"><b>感情访谈</b></a> </div>
+                <div class="title1"><a href="#"><b>喜剧大咖</b></a> </div>
+            </div>
+            <div class="drama_message">
+                <ul class="drama1">
+                    <li><a href="#"><img src="image/ball1.jpg"></a>  </li>
+                    <li class="drama1_1"><a href="#"><b>灌篮2·头盔哥存亡战!</b></a> </li>
+                    <li class="drama1_2">头盔哥挑衅暴击手下败将</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/ball2.gif"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>一起乐队吧·超强律动</b></a> </li>
+                    <li class="drama2_2">"水管哥"改编邓紫棋网红神曲</li>
+                    <li class="drama2_3"><a href="#"><img src="image/ball3.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>好声音2019·太像了！</b></a> </li>
+                    <li class="drama2_2">19岁"小马哥"还原英雄本色</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/ball4.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>我们恋爱吧·甜到炸裂！</b></a> </li>
+                    <li class="drama2_2">男女火速亲昵看羞朱正廷</li>
+                    <li class="drama2_3"><a href="#"><img src="image/ball5.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>各位游客·一针见血</b></a> </li>
+                    <li class="drama2_2">陈学冬揭露塑料姐妹撕逼真相</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/ball6.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>花花2·来选个色号</b></a> </li>
+                    <li class="drama2_2">张嘉倪小S痴心搭配口红</li>
+                    <li class="drama2_3"><a href="#"><img src="image/ball7.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>型动派·要结婚啦？</b></a> </li>
+                    <li class="drama2_2">实锤!沈梦辰公开回应婚期</li>
+                </ul>
+                <ul class="drama2">
+                    <li><a href="#"><img src="image/ball8.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>少年威计划·少女心！</b></a> </li>
+                    <li class="drama2_2">帅气小哥哥集体撸猫好软萌</li>
+                    <li class="drama2_3"><a href="#"><img src="image/ball9.jpg"></a> </li>
+                    <li class="drama2_1"><a href="#"><b>达人秀·戳少女心</b></a> </li>
+                    <li class="drama2_2">帅小伙高空钢丝秀看嗨杨幂</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部  -->
+    <div id="last">
+        <div id="last_content">
+            <ul class="last_one">
+                <li>关于大优酷事业群</li><li><a href="#">友情链接</a></li><li><a href="#">广告服务</a></li><li><a href="#">联系我们</a></li>
+            </ul>
+            <ul class="last_two">
+                <li>优酷热门</li>
+                <li>
+                    <a href="#">剧集</a>&nbsp;&nbsp;&nbsp;<a href="#">电影</a>&nbsp;&nbsp;&nbsp;<a href="#">综艺</a>&nbsp;&nbsp;&nbsp;<a href="#">音乐</a>&nbsp;&nbsp;&nbsp;
+                    <a href="#">少儿</a>&nbsp;&nbsp;&nbsp;<a href="#">资讯</a>&nbsp;&nbsp;&nbsp;<a href="#">纪录片</a>&nbsp;&nbsp;&nbsp;<a href="#">公益</a>
+                </li>
+                <li>
+                    <a href="#">体育</a>&nbsp;&nbsp;&nbsp;<a href="#">汽车</a>&nbsp;&nbsp;&nbsp;<a href="#">科技</a>&nbsp;&nbsp;&nbsp;<a href="#">财经</a>&nbsp;&nbsp;&nbsp;
+                    <a href="#">娱乐</a>&nbsp;&nbsp;&nbsp;<a href="#">文化</a>&nbsp;&nbsp;&nbsp;<a href="#">财经</a>&nbsp;&nbsp;&nbsp;<a href="#">搞笑</a>
+                </li>
+                <li>
+                    <a href="#">旅游</a>&nbsp;&nbsp;&nbsp;<a href="#">时尚</a>&nbsp;&nbsp;&nbsp;<a href="#">亲子</a>&nbsp;&nbsp;&nbsp;<a href="#">教育</a>&nbsp;&nbsp;&nbsp;
+                    <a href="#">游戏</a>&nbsp;&nbsp;&nbsp;<a href="#">会员</a>&nbsp;&nbsp;&nbsp;<a href="#">发现</a>&nbsp;&nbsp;&nbsp;<a href="#">片库</a>
+                </li>
+            </ul>
+            <ul class="last_three">
+                <li>产品中心</li><li><a href="#">PC客户端</a></li><li><a href="#">手机客户端</a></li><li><a href="#">视频云</a></li>
+            </ul>
+            <ul class="last_four">
+                <li>用户</li><li><a href="#">开通大鱼号</a>&nbsp;&nbsp;<a href="#">鲸观</a> </li>
+                <li>支持</li><li><a href="#">繁体字</a>&nbsp;&nbsp;<a href="#">在线反馈</a></li><li><a href="#">侵权投诉</a></li>
+            </ul>
+            <ul class="last_five">
+                <li><a href="#">网络文化经营许可证&nbsp;京文网[2014]0934-236号</a></li>
+                <li><a href="#">网络110报警服务</a></li>
+                <li><a href="#">药品服务许可证(京)-经营-2015-0029</a></li>
+                <li><a href="#">节目制作经营许可证</a></li>
+                <li><a href="#">违法不良信息举报：电话4008100580</a></li>
+                <li><a href="#">邮箱youkujubao@service.alibaba.com</a></li>
+            </ul>
+            <ul class="last_six">
+                <li>请使用者仔细阅读优酷<a href="#">《用户协议》</a>，<a href="#">《隐私政策》</a> </li>
+                <li><a href="#">《版权声明》</a>，<a href="#">《反盗链声明》</a>，<a href="#">《账号注销协议》</a>和</li>
+                <li><a href="#">历史文本协议</a></li>
+                <li><a href="#">Copyright@2019 优酷 youku.com版权所有</a></li>
+                <li><a href="#">信息网络传播试听节目许可证0108283号</a></li>
+                <li><a href="#">家长监护工程</a></li>
+            </ul>
+            <ul class="last_seven">
+                <li><a href="#">京ICP证060288号</a></li>
+                <li><a href="#">网络出版服务许可证</a></li>
+                <li><a href="#">北京互联网举报中心</a></li>
+                <li><a href="#">北京12318文化市场举报热线</a></li>
+                <li><a href="#">违法不良信息举报：电话4008100580</a></li>
+                <li><a href="#">营业执照</a>&nbsp;&nbsp;<a href="#">出版物经营许可证</a></li>
+            </ul>
+            <ul class="last_eight"><img src="image/h3.png"> </ul>
+        </div>
+    </div>
+    <div id="black_back"></div>
+    <div id="black_span">
+        <div  id="num1" class="num"><span class="layui-badge">1</span><a href="#"><span id="span1">&nbsp;花花万物第二季</span></a> </div>
+        <div  id="num2" class="num"><span class="layui-badge layui-bg-orange">2</span><a href="#"><span id="span2">&nbsp;飞虎之雷霆极战</span></a></div>
+        <div  id="num3" class="num"><span class="layui-badge layui-bg-blue">3</span><a href="#"><span id="span3">&nbsp;阿拉丁</span></a></div>
+        <div  id="num4" class="num"><span class="layui-badge layui-bg-gray">4</span><a href="#"><span id="span4">&nbsp;陆战之王</span></a></div>
+        <div  id="num5" class="num"><span class="layui-badge layui-bg-gray">5</span><a href="#"><span id="span5">&nbsp;德云社纲丝节</span></a></div>
+        <div  id="num6" class="num"><span class="layui-badge layui-bg-gray">6</span><a href="#"><span id="span6">&nbsp;你是我的答案</span></a></div>
+        <div  id="num7" class="num"><span class="layui-badge layui-bg-gray">7</span><a href="#"><span id="span7">&nbsp;少年微计划</span></a></div>
+    </div>
+    <a href="#top_title"><div id="float"><img src="image/up.png"></div></a>
+
+<!--    <div class="layui-form-item">-->
+<!--        <label class="layui-form-label">指示器位置</label>-->
+<!--        <div class="layui-input-block">-->
+<!--            <div class="layui-btn-group demoTest" style="margin-top: 5px;">-->
+<!--&lt;!&ndash;                <button class="layui-btn layui-btn-sm" style="background-color: #5FB878;" data-key="indicator" data-type="set" data-value="inside">容器内部</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button class="layui-btn layui-btn-sm" data-type="set" data-key="indicator" data-value="outside">容器外部</button>&ndash;&gt;-->
+<!--            <button class="layui-btn layui-btn-sm" data-type="set" data-key="indicator" data-value="none">不显示</button>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+
+</body>
+</html>
+<script>
+    var userId=sessionStorage.getItem("userId");
+<!--  图片轮播  -->
+    layui.use('carousel', function() {
+        var carousel = layui.carousel
+        carousel.render({
+            elem: '#test10'
+            ,width: '1425px' //设置容器宽度
+            ,height: '420px' //设置容器宽度
+            , interval: 5000
+            ,arrow: 'none'
+            ,anim: 'fade'//切换动画方式
+        });
+    });
+    //回到顶部
+    $(function() {
+        $(window).bind("scroll" ,function() {
+            var top = $(window).scrollTop();
+            var topInt = parseInt(top);
+            if(topInt<420){
+                document.getElementById("float").style.visibility="hidden";
+            }
+            else{
+                document.getElementById("float").style.visibility="visible";
+            }
+        });
+        $.ajax({
+            url:"/selectByPrimaryKey",
+            type:"post",
+            data:{
+                userId:userId,
+            },
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                if (data.facePic==""){
+                    $("#facPic").attr("src", "image/用户头像未登录80-80.png");
+                }else {
+                    $("#facPic").attr("src", data.facePic);
+                }
+            }
+            })
+    });
+
+//搜索跳转
+$(function(){
+    var keyword;
+    var userId=sessionStorage.getItem("userId");
+    $("#submit").click(function(){
+        keyword = $("#search_content").val();
+        location.href="searchpage.html?keyword="+encodeURI(encodeURI(keyword));
+    })
+    $("#jump1").click(function(){
+        keyword = "剧集"
+        location.href="searchpage.html?category="+encodeURI(encodeURI(keyword));
+    })
+    $("#jump2").click(function(){
+        keyword = "电影"
+        location.href="searchpage.html?category="+encodeURI(encodeURI(keyword));
+    })
+
+    $("#jump3").click(function(){
+        keyword = "少儿"
+        location.href="searchpage.html?category="+encodeURI(encodeURI(keyword));
+    })
+    $("#jump4").click(function(){
+        keyword = "综艺"
+        location.href="searchpage.html?category="+encodeURI(encodeURI(keyword));
+    })
+    $("#jump5").click(function(){
+        keyword = "动漫"
+        location.href="searchpage.html?category="+encodeURI(encodeURI(keyword));
+    })
+    $("#jump6").click(function(){
+        keyword = "纪录片"
+        location.href="searchpage.html?category="+encodeURI(encodeURI(keyword));
+    })
+
+})
+
+
+
+
+</script>
+
+
+
+
+
+

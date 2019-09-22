@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索页</title>
+    <link href="css/searchpage.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <link href="image" rel="stylesheet">
+    <link rel="stylesheet" href="js/layui/css/layui.css"  media="all">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/layui/layui.js"></script>
+    <script src="js/myUtil.js"></script>
+
+</head>
+<body>
+<div id="full">
+    <div id="top">
+        <div id="top_content">
+            <ul class="top1">
+                <a href="homepage.html"> <li>YOOKI首页</li></a>
+                <a href="#"><li>合作页</li></a>
+            </ul>
+            <ul class="top2">
+                <a href="login.html"><li>退出</li></a>
+                <li class="space1"></li>
+                <a href="personal_index.html"><li id="userName">怀念12138</li></a>
+            </ul>
+        </div>
+    </div>
+    <div id="title">
+        <div id="title_content">
+            <div id="title_pic"><img src="image/youku图标主要.png" style="width: 180px"> </div>
+            <div id="title_search">
+                <ul id="search1">
+                    <li><input type="text" id="search"></li>
+                    <li><input type="button" id="button" value="搜全网" style="color:#fff;"> </li>
+                </ul>
+                <ul id="search2">
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;热搜</li>
+                    <a href="#"><li>飞虎之雷霆极战</li></a>
+                    <a href="#"><li>这！就是灌篮 第二季</li></a>
+                    <a href="#"><li>德云社己亥年纲丝节庆典 2019</li></a>
+                    <a href="#"><li>陆战之王</li></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+<!--    choose  -->
+    <div id="choose">
+        <div id="choose_content">
+            <ul>
+                <a href="#"><li id="han"><b>相关</b></li></a>
+                <a href="#"><li id="ming"><b>最新</b></li></a>
+                <a href="#"><li id="xi"><b>最热</b></li></a>
+            </ul>
+
+        </div>
+    </div>
+    <div id="content">
+        <div id="content_content">
+            <div class="search_content">
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+                <div class="search_pic">
+
+                    <div><img src="image/content1.jpeg"></div>
+                    <div class="content_meg">
+                        <div class="content_title">
+                            <ul>
+                                <li class="movie_name">飞虎之雷霆极战</li>
+                                <li class="movie_type">剧集</li>
+                                <li class="movie_time">2019</li>
+                            </ul>
+                        </div>
+                        <div class="actor">
+                            <ul>
+                                <li>导演:&nbsp;&nbsp;</li>
+                                <li class="director"><a href="#">查传谊</a>&nbsp;/&nbsp;<a href="#">邓衍成</a> </li>
+                                <li>主演:&nbsp;&nbsp;</li>
+                                <li class="director">
+                                    <a href="#">苗侨伟</a>&nbsp;/&nbsp;<a href="#">黄宗泽</a>&nbsp;/&nbsp;<a href="#">吴卓羲</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text">
+                            简介:&nbsp;&nbsp;《飞虎之雷霆极战》讲述了为应对重大特殊案件而建立的A-Team，秉持着恪尽职守、扬善除恶、公正无私的中国香港警察精神，
+                            在一次次秘密行动中阻止各类犯罪案件及不法分子破坏，保护市民安全，维护社会治安和繁荣发展的故事。
+                        </div>
+                        <div><input type="button" class="start" value="播放" style="color: white"> </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="search_else">
+                <div class="person">
+                    <div class="person_left"></div>
+                    <div class="person_title"><span><b>相关明星</b></span></div>
+                    <div class="space"></div>
+                    <div class="person_img">
+                        <ul class="person_img1">
+                            <li><img src="image/else1.jpeg"> </li>
+                            <li class="pic_title"><a href="#">苗侨伟</a> </li>
+                            <li><img src="image/else2.jpeg"> </li>
+                            <li class="pic_title"><a href="#">李·佩斯</a> </li>
+                        </ul>
+                        <ul class="person_img1">
+                            <li><img src="image/else3.jpeg"> </li>
+                            <li class="pic_title"><a href="#">黄宗泽</a> </li>
+                            <li><img src="image/else4.png"> </li>
+                            <li class="pic_title"><a href="#">马国明</a> </li>
+                        </ul>
+                        <ul class="person_img2">
+                            <li><img src="image/else5.jpeg"> </li>
+                            <li class="pic_title"><a href="#">黄宗泽</a> </li>
+                            <li><img src="image/else6.jpeg"> </li>
+                            <li class="pic_title"><a href="#">马国明</a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hot_find" id="float">
+                    <div class="person_left"></div>
+                    <div class="person_title"><span><b>热搜榜</b></span></div>
+                    <div class="space"></div>
+                    <div class="hot_title">
+                        <ul>
+                            <a href="#"> <li class="style1">剧集</li></a>
+                             <li><a href="#">电影</a></li>
+                             <li><a href="#">动漫</a></li>
+                             <li><a href="#">综艺</a></li>
+                             <li><a href="#">少儿</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="space"></div>
+                    <div class="hot_list">
+                        <ul>
+                            <li><span class="layui-badge layui-bg-red">1</span><a href="#" > &nbsp;&nbsp;飞虎之雷霆极战</a> </li>
+                            <li><span class="layui-badge layui-bg-orange">2</span><a href="#"> &nbsp;&nbsp;陆战之王</a> </li>
+                            <li><span class="layui-badge layui-bg-blue">3</span><a href="#"> &nbsp;&nbsp;微微一笑很倾城</a> </li>
+                            <li><span class="layui-badge layui-bg-gray">4</span><a href="#"> &nbsp;&nbsp;甄嬛传</a> </li>
+                            <li><span class="layui-badge layui-bg-gray">5</span><a href="#"> &nbsp;&nbsp;山月不知心底事</a> </li>
+                            <li><span class="layui-badge layui-bg-gray">6</span><a href="#"> &nbsp;&nbsp;我的邻居睡不着</a> </li>
+                            <li><span class="layui-badge layui-bg-gray">7</span><a href="#"> &nbsp;&nbsp;天雷一部之春花秋月</a> </li>
+                            <li><span class="layui-badge layui-bg-gray">8</span><a href="#"> &nbsp;&nbsp;长安十二时辰</a> </li>
+                            <li><span class="layui-badge layui-bg-gray">9</span><a href="#"> &nbsp;&nbsp;楚汉传奇</a> </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="last">
+        <div id="last_content">
+            <ul class="last_one">
+                <li>关于大优酷事业群</li><li><a href="#">友情链接</a></li><li><a href="#">广告服务</a></li><li><a href="#">联系我们</a></li>
+            </ul>
+            <ul class="last_two">
+                <li>优酷热门</li>
+                <li>
+                    <a href="#">剧集</a>&nbsp;&nbsp;&nbsp;<a href="#">电影</a>&nbsp;&nbsp;&nbsp;<a href="#">综艺</a>&nbsp;&nbsp;&nbsp;<a href="#">音乐</a>&nbsp;&nbsp;&nbsp;
+                    <a href="#">少儿</a>&nbsp;&nbsp;&nbsp;<a href="#">资讯</a>&nbsp;&nbsp;&nbsp;<a href="#">纪录片</a>&nbsp;&nbsp;&nbsp;<a href="#">公益</a>
+                </li>
+                <li>
+                    <a href="#">体育</a>&nbsp;&nbsp;&nbsp;<a href="#">汽车</a>&nbsp;&nbsp;&nbsp;<a href="#">科技</a>&nbsp;&nbsp;&nbsp;<a href="#">财经</a>&nbsp;&nbsp;&nbsp;
+                    <a href="#">娱乐</a>&nbsp;&nbsp;&nbsp;<a href="#">文化</a>&nbsp;&nbsp;&nbsp;<a href="#">财经</a>&nbsp;&nbsp;&nbsp;<a href="#">搞笑</a>
+                </li>
+                <li>
+                    <a href="#">旅游</a>&nbsp;&nbsp;&nbsp;<a href="#">时尚</a>&nbsp;&nbsp;&nbsp;<a href="#">亲子</a>&nbsp;&nbsp;&nbsp;<a href="#">教育</a>&nbsp;&nbsp;&nbsp;
+                    <a href="#">游戏</a>&nbsp;&nbsp;&nbsp;<a href="#">会员</a>&nbsp;&nbsp;&nbsp;<a href="#">发现</a>&nbsp;&nbsp;&nbsp;<a href="#">片库</a>
+                </li>
+            </ul>
+            <ul class="last_three">
+                <li>产品中心</li><li><a href="#">PC客户端</a></li><li><a href="#">手机客户端</a></li><li><a href="#">视频云</a></li>
+            </ul>
+            <ul class="last_four">
+                <li>用户</li><li><a href="#">开通大鱼号</a>&nbsp;&nbsp;<a href="#">鲸观</a> </li>
+                <li>支持</li><li><a href="#">繁体字</a>&nbsp;&nbsp;<a href="#">在线反馈</a></li><li><a href="#">侵权投诉</a></li>
+            </ul>
+            <ul class="last_five">
+                <li><a href="#">网络文化经营许可证&nbsp;京文网[2014]0934-236号</a></li>
+                <li><a href="#">网络110报警服务</a></li>
+                <li><a href="#">药品服务许可证(京)-经营-2015-0029</a></li>
+                <li><a href="#">节目制作经营许可证</a></li>
+                <li><a href="#">违法不良信息举报：电话4008100580</a></li>
+                <li><a href="#">邮箱youkujubao@service.alibaba.com</a></li>
+            </ul>
+            <ul class="last_six">
+                <li>请使用者仔细阅读优酷<a href="#">《用户协议》</a>，<a href="#">《隐私政策》</a> </li>
+                <li><a href="#">《版权声明》</a>，<a href="#">《反盗链声明》</a>，<a href="#">《账号注销协议》</a>和</li>
+                <li><a href="#">历史文本协议</a></li>
+                <li><a href="#">Copyright@2019 优酷 youku.com版权所有</a></li>
+                <li><a href="#">信息网络传播试听节目许可证0108283号</a></li>
+                <li><a href="#">家长监护工程</a></li>
+            </ul>
+            <ul class="last_seven">
+                <li><a href="#">京ICP证060288号</a></li>
+                <li><a href="#">网络出版服务许可证</a></li>
+                <li><a href="#">北京互联网举报中心</a></li>
+                <li><a href="#">北京12318文化市场举报热线</a></li>
+                <li><a href="#">违法不良信息举报：电话4008100580</a></li>
+                <li><a href="#">营业执照</a>&nbsp;&nbsp;<a href="#">出版物经营许可证</a></li>
+            </ul>
+            <ul class="last_eight"><img src="image/h3.png"> </ul>
+        </div>
+    </div>
+</div>
+<!--float-->
+<a href="#top"><div id="float1"><img src="image/up.png"></div></a>
+
+
+
+</body>
+</html>
+<script>
+    var keyword=decodeURI(getUrlParam("keyword"));
+    var category=decodeURI(getUrlParam("category"));
+    console.log(keyword);
+    console.log(category);
+    var userId=sessionStorage.getItem("userId");
+    // 热播滚动
+    $(window).scroll(function(){
+        if($(window).scrollTop() >= 500){
+            $("#float").css("position","fixed");
+            $("#float").css("top","110px");
+            $("#float").css("right","153px");
+        } else{
+            $("#float").css("position","static");
+
+        }
+    });
+    //搜索跳转
+    $(function(){
+        $("#button").click(function(){
+            keyword = $("#search").val();
+            location.href="searchpage.html?keyword="+encodeURI(encodeURI(keyword));
+        })
+    })
+    // title 滚动
+    $(window).scroll(function(){
+        if($(window).scrollTop() >= 200){
+            $("#title").css("position","fixed");
+            $("#title").css("top","0px");
+            $("#title").css("z-index","2");
+            $("#title").css("background-color","white");
+
+        } else{
+            $("#title").css("position","static");
+            $("#title").css("background-color","white");
+        }
+    });
+    $(function() {
+        // alert(category);
+        // alert(keyword);
+        $(window).bind("scroll" ,function() {
+            var top = $(window).scrollTop();
+            var topInt = parseInt(top);
+            if(topInt<420){
+                document.getElementById("float1").style.visibility="hidden";
+            }
+            else{
+                document.getElementById("float1").style.visibility="visible";
+            }
+
+        });
+        $.ajax({
+            url:"/selectByPrimaryKey",
+            type:"post",
+            data:{
+                userId:userId,
+            },
+            dataType:"json",
+            success:function (data) {
+                $("#userName").html(data.userName);
+            }
+        })
+        //分类搜索
+        if (keyword=="null"){
+            $.ajax({
+                url:"/searchCategory",
+                type:"post",
+                data:{category:category},
+                success:function (data) {
+                    $(".search_content").children().remove();
+                    for(var i=0;i<data.length;i++){
+                        data[i].videoCreateTime=formatDate( data[i].videoCreateTime);
+                        var $search_pic = $("<div class=\"search_pic\">\n" +
+                            "\n" +
+                            "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                            "                    <div class=\"content_meg\">\n" +
+                            "                        <div class=\"content_title\">\n" +
+                            "                            <ul>\n" +
+                            "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                            "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                            "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                            "                            </ul>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"actor\">\n" +
+                            "                            <ul>\n" +
+                            "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                            "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                            "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                            "                                <li class=\"director\">\n" +
+                            "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                            "                                </li>\n" +
+                            "                            </ul>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"text\">\n" +
+                            "                            简介:&nbsp;&nbsp;\n" +
+                            "                            "+data[i].videoDescript +"\n" +
+                            "                        </div>\n" +
+                            "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                            "                    </div>\n" +
+                            "                </div>")
+                        $(".search_content").append($search_pic);
+                    }
+                    //最新排序
+                    $("#ming").click(function(){
+                        $.ajax({
+                            url:"/searchCategoryDESC",
+                            type:"post",
+                            data:{category:category},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
+                            }
+                        })
+                    })
+                    //相关排序
+                    $("#han").click(function(){
+                        $.ajax({
+                            url:"/searchCategory",
+                            type:"post",
+                            data:{category:category},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
+                            }
+                        })
+                    })
+                    //最热排序
+                    $("#xi").click(function(){
+                        $.ajax({
+                            url:"/searchCategoryHot",
+                            type:"post",
+                            data:{category:category},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
+                            }
+                        })
+                    })
+
+                }
+            });
+        }else{
+            //结果搜索
+            $.ajax({
+                url:"/searcher",
+                type:"post",
+                data:{keyword:keyword},
+                success:function (data) {
+                    console.log(data);
+                    $(".search_content").children().remove();
+                    for(var i=0;i<data.length;i++){
+                        data[i].videoCreateTime=formatDate( data[i].videoCreateTime);
+                        var $search_pic = $("<div class=\"search_pic\">\n" +
+                            "\n" +
+                            "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                            "                    <div class=\"content_meg\">\n" +
+                            "                        <div class=\"content_title\">\n" +
+                            "                            <ul>\n" +
+                            "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                            "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                            "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                            "                            </ul>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"actor\">\n" +
+                            "                            <ul>\n" +
+                            "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                            "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                            "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                            "                                <li class=\"director\">\n" +
+                            "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                            "                                </li>\n" +
+                            "                            </ul>\n" +
+                            "                        </div>\n" +
+                            "                        <div class=\"text\">\n" +
+                            "                            简介:&nbsp;&nbsp;\n" +
+                            "                            "+data[i].videoDescript +"\n" +
+                            "                        </div>\n" +
+                            "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a></div>\n" +
+                            "                    </div>\n" +
+                            "                </div>")
+                        $(".search_content").append($search_pic);
+                    }
+                    //相关排序
+                    $("#han").click(function(){
+                        $.ajax({
+                            url:"/searcher",
+                            type:"post",
+                            data:{keyword:keyword},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
+                            }
+                        })
+                    })
+                    // 最热排序
+                    $("#xi").click(function(){
+                        $.ajax({
+                            url:"/searchHot",
+                            type:"post",
+                            data:{keyword:keyword},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
+                            }
+                        })
+                    })
+                    // 最新排序
+                    $("#ming").click(function(){
+                        $.ajax({
+                            url:"/searchDESC",
+                            type:"post",
+                            data:{keyword:keyword},
+                            success:function (data) {
+                                $(".search_content").children().remove();
+                                for(var i=0;i<data.length;i++){
+                                    data[i].videoCreateTime = formatDate(data[i].videoCreateTime );
+                                    var $search_pic = $("<div class=\"search_pic\">\n" +
+                                        "\n" +
+                                        "                    <div><img src=\""+data[i].videoPic+"\"></div>\n" +
+                                        "                    <div class=\"content_meg\">\n" +
+                                        "                        <div class=\"content_title\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li class=\"movie_name\">"+data[i].videoName+"<\/li>\n" +
+                                        "                                <li class=\"movie_type\">"+data[i].category+"</li>\n" +
+                                        "                                <li class=\"movie_time\">"+data[i].videoCreateTime+"</li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"actor\">\n" +
+                                        "                            <ul>\n" +
+                                        "                                <li>导演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\"><a href=\"#\">"+data[i].videoDirector+"</a> </li>\n" +
+                                        "                                <li>主演:&nbsp;&nbsp;</li>\n" +
+                                        "                                <li class=\"director\">\n" +
+                                        "                                    <a href=\"#\">"+data[i].videoActor+"</a>\n" +
+                                        "                                </li>\n" +
+                                        "                            </ul>\n" +
+                                        "                        </div>\n" +
+                                        "                        <div class=\"text\">\n" +
+                                        "                            简介:&nbsp;&nbsp;\n" +
+                                        "                            "+data[i].videoDescript +"\n" +
+                                        "                        </div>\n" +
+                                        "                        <div><a href=\"movie.html?videoId="+data[i].id+"\"><input type=\"button\" class=\"start\" value=\"播放\" style=\"color: white\"></a> </div>\n" +
+                                        "                    </div>\n" +
+                                        "                </div>")
+                                    $(".search_content").append($search_pic);
+                                }
+                            }
+                        })
+                    })
+                }
+            });
+        }
+    })
+
+
+</script>

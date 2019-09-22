@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.yk.mapper.DynamicInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.yk.entity.DynamicInfo" >
+    <id column="dynamic_id" property="dynamicId" jdbcType="INTEGER" />
+    <result column="dynamic_time" property="dynamicTime" jdbcType="TIMESTAMP" />
+    <result column="dynamic_text" property="dynamicText" jdbcType="VARCHAR" />
+    <result column="dynamic_image" property="dynamicImage" jdbcType="VARCHAR" />
+    <result column="dynamic_video" property="dynamicVideo" jdbcType="VARCHAR" />
+    <result column="like_number" property="likeNumber" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="transmit_ dynamic_id" property="transmitDynamicId" jdbcType="INTEGER" />
+    <association property="userInfo" resultMap="UserInfoResultMap"></association>
+  </resultMap>
+  <resultMap id="UserInfoResultMap" type="org.lanqiao.yk.entity.UserInfo" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_intro" property="userIntro" jdbcType="VARCHAR" />
+    <result column="face_pic" property="facePic" jdbcType="VARCHAR" />
+    <result column="user_url" property="userUrl" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="telephone" property="telephone" jdbcType="DECIMAL" />
+  </resultMap>
+<!--  江铃-->
+  <select id="searchdynamic" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(*) from dynamic_info where user_id=#{userId,jdbcType=INTEGER}
+  </select>
+  <sql id="Base_Column_List" >
+    dynamic_id, dynamic_time, dynamic_text, dynamic_image, dynamic_video, like_number, 
+    user_id, "transmit_ dynamic_id"
+  </sql>
+  <select id="selectDynamic" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT count(*) FROM dynamic_info where user_id = #{param};
+  </select>
+  <select id="getAllDynamic" resultMap="BaseResultMap">
+   SELECT d.*,u.user_name,u.face_pic FROM user_info u,dynamic_info d where u.user_id=d.user_id order by dynamic_time desc;
+  </select>
+  <select id="getAllDynamicByPage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+   SELECT d.*,u.user_name,u.face_pic FROM user_info u,dynamic_info d where u.user_id=d.user_id limit #{param1},#{param2};
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dynamic_info
+    where dynamic_id = #{dynamicId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dynamic_info
+    where dynamic_id = #{dynamicId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.yk.entity.DynamicInfo" >
+    insert into dynamic_info (dynamic_id, dynamic_time, dynamic_text, 
+      dynamic_image, dynamic_video, like_number, 
+      user_id, "transmit_ dynamic_id")
+    values (#{dynamicId,jdbcType=INTEGER}, #{dynamicTime,jdbcType=TIMESTAMP}, #{dynamicText,jdbcType=VARCHAR}, 
+      #{dynamicImage,jdbcType=VARCHAR}, #{dynamicVideo,jdbcType=VARCHAR}, #{likeNumber,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{transmitDynamicId,jdbcType=INTEGER})
+  </insert>
+  <insert id="myinsert"  parameterType="org.lanqiao.yk.entity.DynamicInfo">
+     insert into dynamic_info (dynamic_text,
+      dynamic_image, dynamic_video,
+      user_id)
+    values (#{dynamicText,jdbcType=VARCHAR},
+      #{dynamicImage,jdbcType=VARCHAR}, #{dynamicVideo,jdbcType=VARCHAR},
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.yk.entity.DynamicInfo" >
+    insert into dynamic_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dynamicId != null" >
+        dynamic_id,
+      </if>
+      <if test="dynamicTime != null" >
+        dynamic_time,
+      </if>
+      <if test="dynamicText != null" >
+        dynamic_text,
+      </if>
+      <if test="dynamicImage != null" >
+        dynamic_image,
+      </if>
+      <if test="dynamicVideo != null" >
+        dynamic_video,
+      </if>
+      <if test="likeNumber != null" >
+        like_number,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="transmitDynamicId != null" >
+        transmit_dynamic_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dynamicId != null" >
+        #{dynamicId,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicTime != null" >
+        #{dynamicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dynamicText != null" >
+        #{dynamicText,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicImage != null" >
+        #{dynamicImage,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicVideo != null" >
+        #{dynamicVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNumber != null" >
+        #{likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="transmitDynamicId != null" >
+        #{transmitDynamicId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.yk.entity.DynamicInfo" >
+    update dynamic_info
+    <set >
+      <if test="dynamicTime != null" >
+        dynamic_time = #{dynamicTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dynamicText != null" >
+        dynamic_text = #{dynamicText,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicImage != null" >
+        dynamic_image = #{dynamicImage,jdbcType=VARCHAR},
+      </if>
+      <if test="dynamicVideo != null" >
+        dynamic_video = #{dynamicVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNumber != null" >
+        like_number = #{likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="transmitDynamicId != null" >
+        "transmit_ dynamic_id" = #{transmitDynamicId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dynamic_id = #{dynamicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.yk.entity.DynamicInfo" >
+    update dynamic_info
+    set dynamic_time = #{dynamicTime,jdbcType=TIMESTAMP},
+      dynamic_text = #{dynamicText,jdbcType=VARCHAR},
+      dynamic_image = #{dynamicImage,jdbcType=VARCHAR},
+      dynamic_video = #{dynamicVideo,jdbcType=VARCHAR},
+      like_number = #{likeNumber,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      "transmit_ dynamic_id" = #{transmitDynamicId,jdbcType=INTEGER}
+    where dynamic_id = #{dynamicId,jdbcType=INTEGER}
+  </update>
+</mapper>

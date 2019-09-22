@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/PersonInf.css">
+    <script src="js/jquery-3.4.1.js"></script>
+
+    <script>
+        var uId=parseInt(sessionStorage.getItem("userId"));
+        // var cId=sessionStorage.getItem("userId");
+
+        var list = new Array();
+
+        $(function () {
+            $("#getId").val(uId);
+            $.ajax({
+                url: "/getuser",
+                data: {"userId": uId},
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    console.log(uId)
+                    console.log(data);
+                    if (data[0].facePic==""){
+                        $("#icon_avatar img").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#icon_avatar img").attr("src", data[0].facePic);
+                    }
+                    if (data[0].facePic==""){
+                        $("#photo").attr("src", "image/用户头像未登录80-80.png");
+                    }else {
+                        $("#photo").attr("src", data[0].facePic);
+                    }
+                    list = data;
+                    $("#nicheng").attr('value', data[0].userName);
+                    if ($("#information input[value='男']").attr('value') == data[0].sex) {
+                        $("#information input[value='男']").attr('checked', true);
+                    } else {
+                        $("#information input[value='女']").attr('checked', true);
+                    }
+                    if (data[0].address != null) {
+                        $("#address").val(data[0].address);
+                    }
+                    if (data[0].facePic) {
+                        $("#photo").attr("src", data[0].facePic);
+                    }
+
+
+                        if (data[0].userIntro != null) {
+                            $("#information textarea[name=jianjie]").val(data[0].userIntro)
+
+                        }
+                        if (data[0].email != null) {
+                            $("#youxiang").val(data[0].email)
+
+                        }
+                        if (data[0].telephone != null) {
+                            $("#shouji").val(data[0].telephone)
+                        }
+                        if (data[0].password != null) {
+                            $("#mima").val(data[0].password)
+                        }
+                        if (data[0].year != null) {
+                            $("#year").val(data[0].year);
+                            $("#month").val(data[0].month);
+                            $("#day").val(data[0].day);
+                        }
+
+                    }
+                });
+            $("#info a").click(function () {
+                $("#sec1").fadeOut(0);
+                $("#xinxi").fadeIn(0);
+            });
+            $("#sec a").click(function () {
+                $("#xinxi").fadeOut(0);
+                $("#sec1").fadeIn(0);
+            });
+            $("#bangding a").click(function () {
+                var email = $("#youxiang ").val();
+                $.ajax({
+                    url: "/updateByPrimaryKeySelective",
+                    type: "post",
+                    data: {"email": email, "userId": 1},
+                    dataType: "json",
+                    success: function () {
+                        $(location).attr('href', '/PersonInf.html');
+                    }
+                })
+            });
+            $("#xiugaishouji").click(function () {
+                var email = list[0].email;
+                var telephone = $("#shouji ").val();
+                if (email == null) {
+                } else {
+                    $.ajax({
+                        url: "/updateByPrimaryKeySelective",
+                        type: "post",
+                        data: {"telephone": telephone, "userId": 1},
+                        dataType: "json",
+                        success: function () {
+                            // $(location).attr('href', '/PersonInf.html');
+                        }
+                    })
+                }
+
+
+            });
+            $("#xiugaimima").click(function () {
+                var mima = $("#mima").val();
+                $.ajax({
+                    url: "/updateByPrimaryKeySelective",
+                    type: "post",
+                    data: {"password": mima, "userId": 1},
+                    dataType: "json",
+                    success: function () {
+                        // $(location).attr('href', '/PersonInf.html');
+                    }
+                })
+            });
+            $("#zhuxiao").click(function () {
+                $.ajax({
+                    url: "/deleteByPrimaryKey",
+                    data: {"userId": 1},
+                    type: "post",
+                    dataType: "json",
+                    success: function () {
+                        // $(location).attr('href', '/PersonInf.html');
+                    }
+                })
+            });
+            $("#submit input").click(function () {
+
+                var name=$("#nicheng").val();
+                var sex=$("#information input[name='sex']:checked").val();
+                var address=$("#address").val();
+                var year=$("#year").val();
+                var month=$("#month").val();
+                var day=$("#day").val();
+                var jianjie=$("#information textarea[name=jianjie]").val();
+
+                $.ajax({
+                    url: "/updateByPrimaryKeySelective",
+                    type: "post",
+                    data: {"userName": name, "userId": 1,"sex":sex,"year":year,"month":month,"day":day,"address":address,"userIntro":jianjie},
+                    dataType: "json",
+                    success: function () {
+                        // $(location).attr('href', '/PersonInf.html');
+                    }
+                })
+
+
+            })
+            $("#xiugaipic").click((function () {
+                    $("form").submit();
+                    $.ajax({
+                        url: "http://localhost:8080/getuser",
+                        data: {"userId": uId},
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            $("#icon_avatar img").attr("src",data[0].facePic)
+                        }
+                    });
+
+                })
+            )
+            // $("#xiugaipic").click(function () {
+            //      var filename = document.getElementById("face1").value;
+            //     $.ajax({
+            //         url: "/updatepic",
+            //         type: "post",
+            //         data: {"files":filename,"userId":uId},
+            //         dataType: "json",
+            //         success: function () {
+            //             $(location).attr('href', '/PersonInf.html');
+            //         }
+            //     })
+            //
+            // })
+
+
+        });
+        function getFileUrl(sourceId) {
+            var url;
+            if (navigator.userAgent.indexOf("MSIE") >= 1) { // IE
+                url = document.getElementById(sourceId).value;
+            } else if (navigator.userAgent.indexOf("Firefox") > 0) { // Firefox
+                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+            } else if (navigator.userAgent.indexOf("Chrome") > 0) { // Chrome
+                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+            }
+            return url;
+        }
+
+        function preImg(sourceId, targetId) {
+            var url = getFileUrl(sourceId);
+            var imgPre = document.getElementById(targetId);
+            imgPre.src = url;
+
+        }
+
+
+    </script>
+</head>
+<body>
+<div id="top_search">
+    <div id="search_youKu"><a href="homepage.html"><img src="image/youku图标主要.png" style="width: 120px"></a></div>
+    <div id="search_list">
+        <ul>
+            <li><a href="#">剧集</a></li>
+            <li><a href="#">电影</a></li>
+            <li><a href="#">综艺</a></li>
+            <li><a href="#">来疯</a></li>
+            <li id="search_list_doHover"><img src="image/块列表蓝.svg">
+                <ul id="search_list_hover">
+                    <li>
+                        <div>
+                            <dl>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span><a href="#">生活</a></span>
+                                </dd>
+                                <dd>
+                                    <span class="search_list_hover_span1"><a href="#">剧集</a></span>
+                                    <span class="search_list_hover_span2"><a href="#">电影</a></span>
+                                    <span class="search_list_hover_span3"><a href="#">综艺</a></span>
+                                    <br>
+                                    <span class="search_list_hover_span4"><a href="#">动漫</a></span>
+                                    <span class="search_list_hover_span5"><a href="#">娱乐</a></span>
+                                    <span><a href="#">生活</a></span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="search">
+        <input value="飞虎">
+        <button><label class="f13 f雅黑">搜库</label></button>
+    </div>
+    <div id="search_icon">
+        <div id="inSearch_icon">
+            <a href="#">
+                <div id="icon_vip" class="f12 fw a78a15"><span id="pic_vip"></span><span class="icon_span icon_span_1">VIP</span>
+                </div>
+            </a>
+            <a href="personal_index.html">
+                <div id="icon_sub" class="f12 f949497 icon_span2"><img id="img1" src="image/信号1.svg"><span
+                        class="icon_span">订阅</span></div>
+            </a>
+            <a href="history.html">
+                <div id="icon_record" class="f12 f949497 icon_span2"><img id="img2" src="image/时钟.svg"><span
+                        class="icon_span">记录</span></div>
+            </a>
+            <a href="personal_index.html">
+                <div id="icon_upload" class="f12 f949497 icon_span2"><img id="img3" src="image/向上-排序.svg"
+                                                                          style="transform: rotate(180deg);"><span
+                        class="icon_span">上传</span></div>
+            </a>
+            <a href="yk_dynamic2.html">
+                <div id="icon_app" class="f12 f949497 icon_span2"><img id="img4" src="image/电脑%20pc%20显示器.svg"><span
+                        class="icon_span">动态</span></div>
+            </a>
+            <a href="#">
+                <div id="icon_avatar"><img src="image/头像demo.png" style="width: 40px;height: 40px;border-radius:100%;">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!--<div id="top"></div>-->
+<div id="content">
+    <div id="head">
+        <div id="head1"><a>设置</a></div>
+        <div id="head2"><a>返回首页</a></div>
+    </div>
+    <div id="options">
+        <ul>
+            <li class="option" id="info"><a href="#">基本资料</a></li>
+            <li class="option" id="sec"><a href="#">安全设置</a></li>
+            <li class="option"><a href="#">我的会员</a></li>
+            <li class="option"><a href="#">个性域名</a></li>
+            <li class="option"><a href="#">绑定网站</a></li>
+            <li class="option"><a href="#">装扮空间</a></li>
+        </ul>
+    </div>
+    <div id="detail">
+        <div id="xinxi">
+            <div id="information">
+                <div>昵称:<input id="nicheng" type="text" value=""style="color: #555555"></div>
+                <br>
+                <div>性别:<input type="radio" name="sex" value="男">男<input type="radio" name="sex" value="女">女</div>
+                <br>
+                <form name="address" action="" method="post">
+                    <div id="dizhi">地址:</div><input id="address" type="text"value="请输入地址" style="color: #555555">
+                </form>
+                <br>
+                <form action="" method="post">
+                    <div id="riqi" >
+                    <div  id="shengri" >生日:</div>
+                    <div class="nian" ><input type="text"id="year"style="width: 60px;height: 20px;color: #555555"></div>
+                        <div class="yue">:年</div>
+                    <div class="nian"><input type="text"id="month"style="width: 60px;height: 20px;color: #555555"></div>
+                        <div class="yue">:月</div>
+                    <div class="nian" ><input type="text"id="day"style="width: 60px;height: 20px;color: #555555"></div>
+                        <div class="yue">:日</div>
+                </div>
+                </form>
+                <br>
+                <div style="width:80px;height: 20px;margin-top: 15px;float: left">个人简介:</div>
+
+                <div><textarea name="jianjie" style="width: 300px;height: 80px;color:#555555"></textarea></div>
+                <br>
+                <div id="submit"><input type="submit"value="保存"></div>
+            </div>
+            <div id="fimage">
+                <form id="form"action="/updatepic" method="post" enctype="multipart/form-data"target="stop">
+
+<!--                    <form id="form" enctype="multipart/form-data">-->
+
+
+                    <input id="getId" value="1" style="display: none" name="userId">
+                    <!--            <div id="faceimage"><input type="image" width="80px"height="80px"></div>-->
+                    <img id="photo" src="image/头像demo.png" width="80px" style="display: block;margin-bottom: 10px"/>
+                    <input type="file" id="face1"name="files" onchange="preImg(this.id,'photo');" >
+                    <input type="button"id="xiugaipic" value="修改">
+
+                </form>
+                <iframe name="stop" style="display:none;"></iframe>
+
+            </div>
+        </div>
+        <form id="myform">
+            <div id="sec1" style="color: #555555" hidden>
+                <ul>
+                    <li>
+                        <div class="sec1">邮箱</div>
+                        <div class="sec2"><input type="text" id="youxiang" value="请绑定邮箱"></div>
+                        <div class="sec3" id="bangding"><a>立即绑定</a></div>
+                    </li>
+                    <li>
+                        <div class="sec1">手机</div>
+                        <div class="sec2"><input type="text" id="shouji" name="shouji" value="17806254021"></div>
+                        <div class="sec3"><a id="xiugaishouji">修改</a></div>
+                    </li>
+                    <li>
+                        <div class="sec1">登录密码</div>
+                        <div class="sec2"><input type="password" name="password" id="mima" value=""></div>
+                        <div class="sec3"><a id="xiugaimima">修改</a></div>
+                    </li>
+                    <li>
+                        <div class="sec1">注销</div>
+                        <div class="sec2">账号注销后，账号将无法登录</div>
+                        <div class="sec3"><a id="zhuxiao">账号注销</a></div>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <div id="beizhu"><p style="color: #555555;font-size: 16px">完善个人资料</p>
+        <p style="color: #555555;font-size: 14px">资料更完整，帐号更安全。完善个人资料将帮助我们改善服务。</p></div>
+</div>
+
+</body>
+
+</html>

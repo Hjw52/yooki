@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.yk.mapper.UserFocusMapper" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.yk.entity.UserFocus" >
+    <id column="focus_id" property="focusId" jdbcType="INTEGER" />
+    <result column="fans_id" property="fansId" jdbcType="INTEGER" />
+    <result column="idol_id" property="idolId" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="searchfans" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(*) from user_focus where idol_id=#{userId,jdbcType=INTEGER}
+  </select>
+  <select id="searchidol" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+  select count(*) from user_focus where fans_id=#{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectIdol" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(idol_id) from user_focus where fans_id = #{param1}
+  </select>
+  <select id="selectFans" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(fans_id) from user_focus where idol_id = #{param1}
+  </select>
+  <select id="checkFocus" resultType="java.lang.Integer" parameterType="org.lanqiao.yk.entity.UserFocus" >
+    select
+    count(*)
+    from user_focus
+    where fans_id = #{fansId} and idol_id=#{idolId}
+  </select>
+  <delete id="deleteFocus" parameterType="org.lanqiao.yk.entity.UserFocus" >
+    delete from user_focus
+    where fans_id = #{fansId} and idol_id=#{idolId}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.yk.entity.UserFocus" >
+    insert into user_focus (focus_id, fans_id, idol_id
+      )
+    values (#{focusId,jdbcType=INTEGER}, #{fansId,jdbcType=INTEGER}, #{idolId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.yk.entity.UserFocus" >
+    insert into user_focus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="focusId != null" >
+        focus_id,
+      </if>
+      <if test="fansId != null" >
+        fans_id,
+      </if>
+      <if test="idolId != null" >
+        idol_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="focusId != null" >
+        #{focusId,jdbcType=INTEGER},
+      </if>
+      <if test="fansId != null" >
+        #{fansId,jdbcType=INTEGER},
+      </if>
+      <if test="idolId != null" >
+        #{idolId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.yk.entity.UserFocus" >
+    update user_focus
+    <set >
+      <if test="fansId != null" >
+        fans_id = #{fansId,jdbcType=INTEGER},
+      </if>
+      <if test="idolId != null" >
+        idol_id = #{idolId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where focus_id = #{focusId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.yk.entity.UserFocus" >
+    update user_focus
+    set fans_id = #{fansId,jdbcType=INTEGER},
+      idol_id = #{idolId,jdbcType=INTEGER}
+    where focus_id = #{focusId,jdbcType=INTEGER}
+  </update>
+</mapper>

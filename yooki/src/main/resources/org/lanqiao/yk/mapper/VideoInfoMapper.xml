@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.yk.mapper.VideoInfoMapper" >
+  <resultMap id="VideoInfoResultMap" type="org.lanqiao.yk.entity.VideoInfo" >
+    <id column="video_id" property="videoId" jdbcType="INTEGER" />
+    <result column="video_name" property="videoName" jdbcType="VARCHAR" />
+    <result column="video_descript" property="videoDescript" jdbcType="VARCHAR" />
+    <result column="video_duration" property="videoDuration" jdbcType="TIMESTAMP" />
+    <result column="video_create_time" property="videoCreateTime" jdbcType="TIMESTAMP" />
+    <result column="is_vip_video" property="isVipVideo" jdbcType="INTEGER" />
+    <result column="is_ auditing" property="isAuditing" jdbcType="INTEGER" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="video_browse" property="videoBrowse" jdbcType="INTEGER" />
+    <result column="video_pic" property="videoPic" jdbcType="VARCHAR" />
+    <result column="video_director" property="videoDirector" jdbcType="VARCHAR" />
+    <result column="video_actor" property="videoActor" jdbcType="VARCHAR" />
+    <association property="userInfo" resultMap="UserInfoResultMap"/>
+    <association property="videoPicMov" resultMap="VideoPicMovResultMap"/>
+    <association property="userCollect" resultMap="UserCollectResultMap" />
+  </resultMap>
+  <resultMap id="UserInfoResultMap" type="org.lanqiao.yk.entity.UserInfo" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_intro" property="userIntro" jdbcType="VARCHAR" />
+    <result column="face_pic" property="facePic" jdbcType="VARCHAR" />
+    <result column="user_url" property="userUrl" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="telephone" property="telephone" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="VideoPicMovResultMap" type="org.lanqiao.yk.entity.VideoPicMov" >
+    <id column="pic_mov_id" property="picMovId" jdbcType="INTEGER" />
+    <result column="video_pic" property="videoPic" jdbcType="VARCHAR" />
+    <result column="video_mov" property="videoMov" jdbcType="VARCHAR" />
+    <result column="video_id" property="videoId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="UserCollectResultMap" type="org.lanqiao.yk.entity.UserCollect" >
+    <id column="collect_id" property="collectId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="video_id" property="videoId" jdbcType="INTEGER" />
+  </resultMap>
+<!--  江铃-->
+  <select id="searchvideo" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(*) from video_info where user_id=#{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="showAllvideo" resultMap="VideoInfoResultMap" parameterType="java.lang.Integer">
+select vi.video_id,vi.video_pic,video_descript,video_create_time
+from video_info vi,video_pic_mov vm
+where user_id= #{userId,jdbcType=INTEGER} and vi.video_id=vm.video_id
+</select>
+
+  <select id="showAllcollect" resultMap="VideoInfoResultMap" parameterType="java.lang.Integer">
+    select vi.video_id,vi.video_pic,video_descript,video_create_time
+    from video_info vi,video_pic_mov vm,user_collect
+    where user_collect.user_id= #{userId,jdbcType=INTEGER} and user_collect.video_id=vi.video_id and vm.video_id=vi.video_id
+  </select>
+  <!--  增加浏览量-->
+  <update id="addBrowse" parameterType="java.lang.Integer">
+    update video_info set video_browse = video_browse+1 where video_id=#{videoId}
+  </update>
+  <!--  获取视频信息-->
+  <select id="getVideo" resultMap="VideoInfoResultMap" parameterType="java.lang.Integer" >
+    select
+    *
+    from video_info v,user_info u,video_pic_mov p
+    where v.video_id = #{videoId,jdbcType=INTEGER} and v.user_id=u.user_id and v.video_id = p.video_id
+  </select>
+  <sql id="Base_Column_List" >
+    video_id, video_name, video_descript, video_duration, video_create_time, is_vip_video, 
+    "is_ auditing", category, user_id, video_browse, video_pic, video_director, video_actor
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="VideoInfoResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from video_info
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from video_info
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.yk.entity.VideoInfo" >
+    insert into video_info (video_id, video_name, video_descript, 
+      video_duration, video_create_time, is_vip_video, 
+      "is_ auditing", category, user_id, 
+      video_browse, video_pic, video_director, 
+      video_actor)
+    values (#{videoId,jdbcType=INTEGER}, #{videoName,jdbcType=VARCHAR}, #{videoDescript,jdbcType=VARCHAR}, 
+      #{videoDuration,jdbcType=TIMESTAMP}, #{videoCreateTime,jdbcType=TIMESTAMP}, #{isVipVideo,jdbcType=INTEGER}, 
+      #{isAuditing,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{videoBrowse,jdbcType=INTEGER}, #{videoPic,jdbcType=VARCHAR}, #{videoDirector,jdbcType=VARCHAR}, 
+      #{videoActor,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.yk.entity.VideoInfo" >
+    insert into video_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="videoName != null" >
+        video_name,
+      </if>
+      <if test="videoDescript != null" >
+        video_descript,
+      </if>
+      <if test="videoDuration != null" >
+        video_duration,
+      </if>
+      <if test="videoCreateTime != null" >
+        video_create_time,
+      </if>
+      <if test="isVipVideo != null" >
+        is_vip_video,
+      </if>
+      <if test="isAuditing != null" >
+        "is_ auditing",
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="videoBrowse != null" >
+        video_browse,
+      </if>
+      <if test="videoPic != null" >
+        video_pic,
+      </if>
+      <if test="videoDirector != null" >
+        video_director,
+      </if>
+      <if test="videoActor != null" >
+        video_actor,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="videoId != null" >
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="videoName != null" >
+        #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDescript != null" >
+        #{videoDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDuration != null" >
+        #{videoDuration,jdbcType=TIMESTAMP},
+      </if>
+      <if test="videoCreateTime != null" >
+        #{videoCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isVipVideo != null" >
+        #{isVipVideo,jdbcType=INTEGER},
+      </if>
+      <if test="isAuditing != null" >
+        #{isAuditing,jdbcType=INTEGER},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="videoBrowse != null" >
+        #{videoBrowse,jdbcType=INTEGER},
+      </if>
+      <if test="videoPic != null" >
+        #{videoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDirector != null" >
+        #{videoDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="videoActor != null" >
+        #{videoActor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.yk.entity.VideoInfo" >
+    update video_info
+    <set >
+      <if test="videoName != null" >
+        video_name = #{videoName,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDescript != null" >
+        video_descript = #{videoDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDuration != null" >
+        video_duration = #{videoDuration,jdbcType=TIMESTAMP},
+      </if>
+      <if test="videoCreateTime != null" >
+        video_create_time = #{videoCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isVipVideo != null" >
+        is_vip_video = #{isVipVideo,jdbcType=INTEGER},
+      </if>
+      <if test="isAuditing != null" >
+        "is_ auditing" = #{isAuditing,jdbcType=INTEGER},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="videoBrowse != null" >
+        video_browse = #{videoBrowse,jdbcType=INTEGER},
+      </if>
+      <if test="videoPic != null" >
+        video_pic = #{videoPic,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDirector != null" >
+        video_director = #{videoDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="videoActor != null" >
+        video_actor = #{videoActor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.yk.entity.VideoInfo" >
+    update video_info
+    set video_name = #{videoName,jdbcType=VARCHAR},
+      video_descript = #{videoDescript,jdbcType=VARCHAR},
+      video_duration = #{videoDuration,jdbcType=TIMESTAMP},
+      video_create_time = #{videoCreateTime,jdbcType=TIMESTAMP},
+      is_vip_video = #{isVipVideo,jdbcType=INTEGER},
+      "is_ auditing" = #{isAuditing,jdbcType=INTEGER},
+      category = #{category,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      video_browse = #{videoBrowse,jdbcType=INTEGER},
+      video_pic = #{videoPic,jdbcType=VARCHAR},
+      video_director = #{videoDirector,jdbcType=VARCHAR},
+      video_actor = #{videoActor,jdbcType=VARCHAR}
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+</mapper>

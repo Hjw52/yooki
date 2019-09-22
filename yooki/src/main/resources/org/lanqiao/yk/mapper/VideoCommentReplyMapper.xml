@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.yk.mapper.VideoCommentReplyMapper" >
+  <resultMap id="ViReplyResultMap" type="org.lanqiao.yk.entity.VideoCommentReply" >
+    <id column="reply_id" property="replyId" jdbcType="INTEGER" />
+    <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+    <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
+    <result column="like_number" property="likeNumber" jdbcType="INTEGER" />
+    <result column="dislike_number" property="dislikeNumber" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="comment_id" property="commentId" jdbcType="INTEGER" />
+    <association property="userInfo" resultMap="UserInfoMap"/>
+  </resultMap>
+  <resultMap id="UserInfoMap" type="org.lanqiao.yk.entity.UserInfo" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_intro" property="userIntro" jdbcType="VARCHAR" />
+    <result column="face_pic" property="facePic" jdbcType="VARCHAR" />
+    <result column="user_url" property="userUrl" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="day" property="day" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="regtime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="telephone" property="telephone" jdbcType="DECIMAL" />
+    <result column="cNum" property="cNum" jdbcType="INTEGER"/>
+  </resultMap>
+  <select id="getAllViReply" resultMap="ViReplyResultMap" parameterType="java.lang.Integer">
+    select * from video_comment_reply vc,user_info u where comment_id=#{commentId} and vc.user_id=u.user_id
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from video_comment_reply
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.yk.entity.VideoCommentReply" >
+    insert into video_comment_reply (reply_id, reply_content, reply_time, 
+      like_number, dislike_number, user_id, 
+      comment_id)
+    values (#{replyId,jdbcType=INTEGER}, #{replyContent,jdbcType=VARCHAR}, #{replyTime,jdbcType=TIMESTAMP}, 
+      #{likeNumber,jdbcType=INTEGER}, #{dislikeNumber,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{commentId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.yk.entity.VideoCommentReply" >
+    insert into video_comment_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        reply_id,
+      </if>
+      <if test="replyContent != null" >
+        reply_content,
+      </if>
+      <if test="replyTime != null" >
+        reply_time,
+      </if>
+      <if test="likeNumber != null" >
+        like_number,
+      </if>
+      <if test="dislikeNumber != null" >
+        dislike_number,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        #{replyId,jdbcType=INTEGER},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="likeNumber != null" >
+        #{likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dislikeNumber != null" >
+        #{dislikeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commentId != null" >
+        #{commentId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.yk.entity.VideoCommentReply" >
+    update video_comment_reply
+    <set >
+      <if test="replyContent != null" >
+        reply_content = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null" >
+        reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="likeNumber != null" >
+        like_number = #{likeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dislikeNumber != null" >
+        dislike_number = #{dislikeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commentId != null" >
+        comment_id = #{commentId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.yk.entity.VideoCommentReply" >
+    update video_comment_reply
+    set reply_content = #{replyContent,jdbcType=VARCHAR},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      like_number = #{likeNumber,jdbcType=INTEGER},
+      dislike_number = #{dislikeNumber,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      comment_id = #{commentId,jdbcType=INTEGER}
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor demo</title>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="bootstrap-wysiwyg.js"></script>
+</head>
+<body>
+    <div class="btn-toolbar" data-role="editor-toolbar"
+    data-target="#editor">
+...
+</div> 
+ 
+    <script type="text/javascript">
+       $('#editor').wysiwyg({
+  hotKeys: {
+    'ctrl+b meta+b': 'bold',
+    'ctrl+i meta+i': 'italic',
+    'ctrl+u meta+u': 'underline',
+    'ctrl+z meta+z': 'undo',
+    'ctrl+y meta+y meta+shift+z': 'redo'
+  }
+});
+    </script>
+</body>
+</html>
