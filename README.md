@@ -8,14 +8,14 @@
 
 ### 登录页
 
-![image-20200721222902803](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20200721222902803.png)
+![image-20200721222902803](https://github.com/Hjw52/yooki/raw/master/images/image-20200721222902803.png)
 
-![image-20200721222824931](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20200721222824931.png)
+![image-20200721222824931](https://github.com/Hjw52/yooki/raw/master/images/image-20200721222824931.png)
 
 ### 主页（仿优酷风格）
 
-![image-20200721222948711](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20200721222948711.png)
+![image-20200721222948711](https://github.com/Hjw52/yooki/raw/master/images/image-20200721222948711.png)
 
 <h3>个人动态页
 
-![image-20200721223106634](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\image-20200721223106634.png)
+![image-20200721223106634](https://github.com/Hjw52/yooki/raw/master/images/image-20200721223106634.png)
