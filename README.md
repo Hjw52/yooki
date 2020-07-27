@@ -2,7 +2,7 @@
 
 一款视频网站加上社交功能，让用户能够边看视频的同时按兴趣喜好进行交流。
 
-**技术栈：**主体架构springboot+mybatis ，Redis做缓存层 ，solr中文检索分词，前后端分离项目。
+技术栈：主体架构springboot+mybatis ，Redis做缓存层 ，solr中文检索分词，前后端分离项目。
 
 ## 相关页面
 
